@@ -1,0 +1,342 @@
+{
+    "name": "vscode-appwrite",
+    "displayName": "vscode-appwrite",
+    "description": "Manage your Appwrite resources right from VS Code!",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.55.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:vscode-appwrite.Connect",
+        "onView:Appwrite",
+        "onView:Users",
+        "onView:Database",
+        "onView:Health",
+        "onCommand:vscode-appwrite.AddProject"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "vscode-appwrite.Connect",
+                "title": "Connect to Appwrite"
+            },
+            {
+                "command": "vscode-appwrite.AddProject",
+                "title": "Add an Appwrite project"
+            },
+            {
+                "command": "vscode-appwrite.SelectProject",
+                "title": "Select an Appwrite project"
+            },
+            {
+                "command": "vscode-appwrite.CreateUser",
+                "title": "Create user",
+                "icon": "$(add)"
+            },
+            {
+                "command": "vscode-appwrite.DeleteUser",
+                "title": "Delete user",
+                "icon": "$(trash)"
+            },
+            {
+                "command": "vscode-appwrite.GetUserLogs",
+                "title": "Get user logs",
+                "icon": "$(output)"
+            },
+            {
+                "command": "vscode-appwrite.openUserInConsole",
+                "title": "View user in Appwrite console",
+                "icon": "$(link-external)"
+            },
+            {
+                "command": "vscode-appwrite.viewUserPrefs",
+                "title": "View user preferences",
+                "icon": "$(json)"
+            },
+            {
+                "command": "vscode-appwrite.refreshEntry",
+                "title": "Refresh",
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "vscode-appwrite.copyUserId",
+                "title": "Copy user ID",
+                "icon": "$(clippy)"
+            },
+            {
+                "command": "vscode-appwrite.copyUserEmail",
+                "title": "Copy user email",
+                "icon": "$(clippy)"
+            },
+            {
+                "command": "vscode-appwrite.refreshUsersList",
+                "title": "Refresh users list",
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "vscode-appwrite.OpenDocumentation",
+                "title": "Open documentation",
+                "icon": "$(book)"
+            },
+            {
+                "command": "vscode-appwrite.viewDocumentAsJson",
+                "title": "View as JSON"
+            },
+            {
+                "command": "vscode-appwrite.viewCollectionAsJson",
+                "title": "View collection as JSON"
+            },
+            {
+                "command": "vscode-appwrite.refreshCollection",
+                "title": "Refresh",
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "vscode-appwrite.createRule",
+                "title": "Create collection rule",
+                "icon": "$(add)"
+            },
+            {
+                "command": "vscode-appwrite.removeRule",
+                "title": "Remove collection rule"
+            },
+            {
+                "command": "vscode-appwrite.deleteDocument",
+                "title": "Delete document"
+            },
+            {
+                "command": "vscode-appwrite.deleteCollection",
+                "title": "Delete collection"
+            },
+            {
+                "command": "vscode-appwrite.refreshCollectionsList",
+                "title": "Refresh",
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "vscode-appwrite.createCollection",
+                "title": "Create collection",
+                "icon": "$(add)"
+            },
+            {
+                "command": "vscode-appwrite.createPermission",
+                "title": "Create permission",
+                "icon": "$(add)"
+            },
+            {
+                "command": "vscode-appwrite.deletePermission",
+                "title": "Delete permission",
+                "icon": "$(trash)"
+            },
+            {
+                "command": "vscode-appwrite.editPermission",
+                "title": "Edit permission",
+                "icon": "$(edit)"
+            }
+        ],
+        "views": {
+            "Appwrite": [
+                {
+                    "id": "Users",
+                    "name": "Users"
+                },
+                {
+                    "id": "Database",
+                    "name": "Database"
+                },
+                {
+                    "id": "Storage",
+                    "name": "Storage"
+                },
+                {
+                    "id": "Functions",
+                    "name": "Functions"
+                },
+                {
+                    "id": "Health",
+                    "name": "Health"
+                }
+            ]
+        },
+        "viewsWelcome": [
+            {
+                "view": "Users",
+                "contents": "Connect to Appwrite to get started.\n[Connect to Appwrite](command:vscode-appwrite.Connect)"
+            }
+        ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "vscode-appwrite.OpenDocumentation",
+                    "when": "view == Users",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.refreshUsersList",
+                    "when": "view == Users",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.CreateUser",
+                    "when": "view == Users",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.refreshCollectionsList",
+                    "when": "view == Database",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.createCollection",
+                    "when": "view == Database",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "vscode-appwrite.viewUserPrefs",
+                    "when": "viewItem == users.prefs",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.DeleteUser",
+                    "when": "viewItem == user"
+                },
+                {
+                    "command": "vscode-appwrite.GetUserLogs",
+                    "when": "viewItem == user"
+                },
+                {
+                    "command": "vscode-appwrite.openUserInConsole",
+                    "when": "view == Users && viewItem == user",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.copyUserId",
+                    "when": "viewItem == user.id",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.copyUserEmail",
+                    "when": "viewItem == user.email",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.viewDocumentAsJson",
+                    "when": "viewItem == document"
+                },
+                {
+                    "command": "vscode-appwrite.viewCollectionAsJson",
+                    "when": "viewItem == collection"
+                },
+                {
+                    "command": "vscode-appwrite.deleteCollection",
+                    "when": "viewItem == collection"
+                },
+                {
+                    "command": "vscode-appwrite.createRule",
+                    "when": "viewItem == collection.rules",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.createRule",
+                    "when": "viewItem == collection.rules"
+                },
+                {
+                    "command": "vscode-appwrite.removeRule",
+                    "when": "viewItem == collection.rule"
+                },
+                {
+                    "command": "vscode-appwrite.refreshCollection",
+                    "when": "viewItem == collection"
+                },
+                {
+                    "command": "vscode-appwrite.deleteDocument",
+                    "when": "viewItem == document"
+                },
+                {
+                    "command": "vscode-appwrite.createPermission",
+                    "when": "viewItem =~ /^(permissions)$/"
+                },
+                {
+                    "command": "vscode-appwrite.createPermission",
+                    "when": "viewItem =~ /^(permissions)$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.editPermission",
+                    "when": "viewItem =~ /^(permission)$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.editPermission",
+                    "when": "viewItem =~ /^(permission)$/"
+                },
+                {
+                    "command": "vscode-appwrite.deletePermission",
+                    "when": "viewItem =~ /^(permission)$/"
+                },
+                {
+                    "command": "vscode-appwrite.deletePermission",
+                    "when": "viewItem =~ /^(permission)$/",
+                    "group": "inline"
+                }
+            ]
+        },
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "Appwrite",
+                    "title": "Appwrite",
+                    "icon": "resources/vscode-appwrite.svg"
+                }
+            ]
+        },
+        "configuration": {
+            "title": "Appwrite",
+            "properties": {
+                "appwrite.projects": {
+                    "type": "array",
+                    "default": [],
+                    "description": "List of Appwrite projects"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run package",
+        "compile": "webpack",
+        "watch": "webpack --watch",
+        "package": "webpack --mode production --devtool hidden-source-map",
+        "test-compile": "tsc -p ./",
+        "test-watch": "tsc -watch -p ./",
+        "pretest": "npm run test-compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^9.0.11",
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.0.4",
+        "@types/node": "^12.11.7",
+        "@types/vscode": "^1.55.0",
+        "@typescript-eslint/eslint-plugin": "^4.14.1",
+        "@typescript-eslint/parser": "^4.14.1",
+        "eslint": "^7.19.0",
+        "glob": "^7.1.6",
+        "mocha": "^8.2.1",
+        "ts-loader": "^8.0.14",
+        "typescript": "^4.1.3",
+        "vscode-test": "^1.5.0",
+        "webpack": "^5.19.0",
+        "webpack-cli": "^4.4.0"
+    },
+    "dependencies": {
+        "fs-extra": "^9.1.0",
+        "node-appwrite": "^2.1.0"
+    }
+}
