@@ -1,6 +1,12 @@
-# vscode-appwrite README
+# vscode-appwrite
 
-This is the README for your extension "vscode-appwrite". After writing up a brief description, we recommend including the following sections.
+## What is Appwrite?
+
+From [appwrite.io](https://appwrite.io)
+
+> Secure Open-Source Backend Server for Web, Mobile & Flutter Developers
+>
+> Appwrite is a self-hosted solution that provides developers with a set of easy-to-use and integrate REST APIs to manage their core backend needs.
 
 ## Features
 
