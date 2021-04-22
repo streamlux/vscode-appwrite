@@ -52,7 +52,8 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("CreateUser", createUser);
     registerCommand("refreshUsersList", refreshUsersList);
     registerCommand("DeleteUser", deleteUser);
-    registerCommand("OpenDocumentation", openDocumentation);
+    registerCommand("OpenUsersDocumentation", () => openDocumentation('users'));
+    registerCommand("OpenDatabaseDocumentation", () => openDocumentation('database'));
     registerCommand("GetUserLogs", getUserLogs);
     registerCommand("viewDocumentAsJson", viewDocumentAsJson);
     registerCommand("AddProject", addProject);
@@ -66,4 +67,6 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("createCollection", createCollection, 'database');
     registerCommand("createPermission", createPermission, 'database');
     registerCommand("deletePermission", deletePermission, 'database');
+    registerCommand("refreshHealth", () => {}, 'health');
+    registerCommand("openHealthDocumentation",  () => openDocumentation('health'));
 }

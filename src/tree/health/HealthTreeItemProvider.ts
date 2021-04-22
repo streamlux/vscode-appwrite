@@ -1,11 +1,23 @@
 import * as vscode from "vscode";
 import { healthClient } from "../../client";
+import { ext } from "../../extensionVariables";
 import { HealthTreeItem } from "./HealthTreeItem";
+import * as dayjs from "dayjs";
+import * as relativeTime from "dayjs/plugin/relativeTime";
+import * as localizedFormat from "dayjs/plugin/localizedFormat";
+import { healthTooltips } from "../../appwrite/Health";
+import { AppwriteHealth } from "../../appwrite";
+// dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
+
+type PartialRecord<K extends string | number | symbol, T> = { [P in K]?: T };
 
 export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<HealthTreeItem | undefined | void> = new vscode.EventEmitter<
         HealthTreeItem | undefined | void
     >();
+
+    private lastChecked: Date = new Date();
 
     readonly onDidChangeTreeData: vscode.Event<HealthTreeItem | undefined | void> = this._onDidChangeTreeData.event;
 
@@ -23,9 +35,17 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
         // get children for root
         if (element === undefined) {
             const health = await healthClient.checkup();
-            return Object.entries(health).map(([service, status]) => {
-                return new HealthTreeItem(service, status);
+            ext.outputChannel?.append(JSON.stringify(health, null, 4));
+            const healthItems = Object.entries(health).map(([service, status]) => {
+                return new HealthTreeItem(service, status, healthTooltips[service as keyof AppwriteHealth]);
             });
+            this.lastChecked = new Date();
+            return [
+                {
+                    label: `Updated at ${dayjs(this.lastChecked).format("LTS")}`,
+                },
+                ...healthItems,
+            ];
         }
         return [];
     }

@@ -1,4 +1,6 @@
-# vscode-appwrite
+# Appwrite for Visual Studio Code
+
+Use the Appwrite extension to quickly monitor, manage, and interact with your Appwrite instance directly from VS Code.
 
 ## What is Appwrite?
 
@@ -10,17 +12,20 @@ From [appwrite.io](https://appwrite.io)
 
 ## Features
 
+
+
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
 For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
+### Check the health of all the Appwrite services.
+![Health feature](./media/features/health/scr1.png)
 
 > Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+This extension does not provide features for setting up or installing Appwrite. Only managing and interacting with Appwrite once it's running.
 
 ## Extension Settings
 
@@ -43,15 +48,8 @@ Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
-Initial release of ...
+Initial release of the Appwrite extension for VS Code
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
 
 -----------------------------------------------------------------------------------------------------------
 ## Following extension guidelines

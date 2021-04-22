@@ -6,6 +6,9 @@
     "engines": {
         "vscode": "^1.55.0"
     },
+    "repository": {
+        "url": "https://github.com/streamlux/vscode-appwrite"
+    },
     "categories": [
         "Other"
     ],
@@ -78,7 +81,12 @@
                 "icon": "$(refresh)"
             },
             {
-                "command": "vscode-appwrite.OpenDocumentation",
+                "command": "vscode-appwrite.OpenUsersDocumentation",
+                "title": "Open documentation",
+                "icon": "$(book)"
+            },
+            {
+                "command": "vscode-appwrite.OpenDatabaseDocumentation",
                 "title": "Open documentation",
                 "icon": "$(book)"
             },
@@ -136,6 +144,16 @@
                 "command": "vscode-appwrite.editPermission",
                 "title": "Edit permission",
                 "icon": "$(edit)"
+            },
+            {
+                "command": "vscode-appwrite.refreshHealth",
+                "title": "Refresh health",
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "vscode-appwrite.openHealthDocumentation",
+                "title": "Open health documentation",
+                "icon": "$(book)"
             }
         ],
         "views": {
@@ -171,8 +189,13 @@
         "menus": {
             "view/title": [
                 {
-                    "command": "vscode-appwrite.OpenDocumentation",
+                    "command": "vscode-appwrite.OpenUsersDocumentation",
                     "when": "view == Users",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.OpenDatabaseDocumentation",
+                    "when": "view == Database",
                     "group": "navigation"
                 },
                 {
@@ -193,6 +216,16 @@
                 {
                     "command": "vscode-appwrite.createCollection",
                     "when": "view == Database",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.refreshHealth",
+                    "when": "view == Health",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.openHealthDocumentation",
+                    "when": "view == Health",
                     "group": "navigation"
                 }
             ],
@@ -292,7 +325,7 @@
                 {
                     "id": "Appwrite",
                     "title": "Appwrite",
-                    "icon": "resources/vscode-appwrite.svg"
+                    "icon": "./resources/vscode-appwrite.svg"
                 }
             ]
         },
@@ -302,7 +335,7 @@
                 "appwrite.projects": {
                     "type": "array",
                     "default": [],
-                    "description": "List of Appwrite projects"
+                    "markdownDescription": "List of Appwrite project configurations. You can use the Connect command to set this up, or see [docs](https://github.com/streamlux/vscode-appwrite/) for more information."
                 }
             }
         }
@@ -336,6 +369,7 @@
         "webpack-cli": "^4.4.0"
     },
     "dependencies": {
+        "dayjs": "^1.10.4",
         "fs-extra": "^9.1.0",
         "node-appwrite": "^2.1.0"
     }
