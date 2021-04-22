@@ -12,16 +12,20 @@ From [appwrite.io](https://appwrite.io)
 
 ## Features
 
+### View database documents right inside VS Code.
 
+![Database feature](./media/features/database/scr2.png)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Manage database collection permissions and rules.
 
-For example if there is an image subfolder under your extension project workspace:
+![Database feature](./media/features/database/scr1.png)
 
-### Check the health of all the Appwrite services.
+### Create and view users, user preferences, and more.
+![Users feature](./media/features/users/scr1.png)
+
+### Quickly and easily check the health of all the Appwrite services.
+
 ![Health feature](./media/features/health/scr1.png)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
 
@@ -35,20 +39,30 @@ For example:
 
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `appwrite.projects`: List of Appwrite project configurations. To set up a project configuration, run the `Connect to Appwrite` command. Search commands by hitting <kbd>F1</kbd>, then search `Connect to Appwrite`.
+
+After connecting to an Appwrite project, your `appwrite.projects` setting will contain:
+
+```json
+{
+            "endpoint": "https://[Domain]/v1",
+            "projectId": "[Project ID]",
+            "secret": "API key with all scopes",
+            "nickname": "My project"
+}
+```
+
+We plan on adding better multi-project support in the future.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
+If you find issues, or want to suggest features, please file them in the issues section of the repository.
 
 ### 1.0.0
 
-Initial release of the Appwrite extension for VS Code
+Initial release of the Appwrite extension for VS Code.
+
+The initial release only includes features for Database, Users, and Health Appwrite APIs. However support for Storage and Functions APIs is on the way.
 
 
 -----------------------------------------------------------------------------------------------------------

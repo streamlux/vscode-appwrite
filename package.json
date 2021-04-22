@@ -25,15 +25,8 @@
         "commands": [
             {
                 "command": "vscode-appwrite.Connect",
-                "title": "Connect to Appwrite"
-            },
-            {
-                "command": "vscode-appwrite.AddProject",
-                "title": "Add an Appwrite project"
-            },
-            {
-                "command": "vscode-appwrite.SelectProject",
-                "title": "Select an Appwrite project"
+                "title": "Connect to Appwrite",
+                "category": ""
             },
             {
                 "command": "vscode-appwrite.CreateUser",
@@ -232,8 +225,7 @@
             "view/item/context": [
                 {
                     "command": "vscode-appwrite.viewUserPrefs",
-                    "when": "viewItem == users.prefs",
-                    "group": "inline"
+                    "when": "viewItem == user"
                 },
                 {
                     "command": "vscode-appwrite.DeleteUser",
@@ -317,6 +309,78 @@
                     "command": "vscode-appwrite.deletePermission",
                     "when": "viewItem =~ /^(permission)$/",
                     "group": "inline"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "vscode-appwrite.Connect"
+                },
+                {
+                    "command": "vscode-appwrite.CreateUser"
+                },
+                {
+                    "command": "vscode-appwrite.DeleteUser",
+                    "when": "viewItem == user"
+                },
+                {
+                    "command": "vscode-appwrite.GetUserLogs",
+                    "when": "viewItem == user"
+                },
+                {
+                    "command": "vscode-appwrite.openUserInConsole",
+                    "when": "viewItem == user"
+                },
+                {
+                    "command": "vscode-appwrite.viewUserPrefs",
+                    "when": "viewItem == user"
+                },
+                {
+                    "command": "vscode-appwrite.copyUserId",
+                    "when": "viewItem == user.id"
+                },
+                {
+                    "command": "vscode-appwrite.copyUserEmail",
+                    "when": "viewItem == user.email"
+                },
+                {
+                    "command": "vscode-appwrite.viewDocumentAsJson",
+                    "when": "viewItem == document"
+                },
+                {
+                    "command": "vscode-appwrite.viewCollectionAsJson",
+                    "when": "viewItem == collection"
+                },
+                {
+                    "command": "vscode-appwrite.refreshCollection",
+                    "when": "viewItem == collection"
+                },
+                {
+                    "command": "vscode-appwrite.createRule",
+                    "when": "viewItem == collection.rules"
+                },
+                {
+                    "command": "vscode-appwrite.removeRule",
+                    "when": "viewItem == rule"
+                },
+                {
+                    "command": "vscode-appwrite.deleteDocument",
+                    "when": "viewItem == document"
+                },
+                {
+                    "command": "vscode-appwrite.deleteCollection",
+                    "when": "viewItem == collection"
+                },
+                {
+                    "command": "vscode-appwrite.createPermission",
+                    "when": "viewItem == collection.permissions"
+                },
+                {
+                    "command": "vscode-appwrite.deletePermission",
+                    "when": "viewItem =~ /^(permission)$/"
+                },
+                {
+                    "command": "vscode-appwrite.editPermission",
+                    "when": "viewItem =~ /^(permission)$/"
                 }
             ]
         },

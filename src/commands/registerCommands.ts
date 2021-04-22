@@ -3,11 +3,11 @@ import { AppwriteTree, ext } from "../extensionVariables";
 import { refreshTree } from "../utils/refreshTree";
 import { connectAppwrite } from "./connectAppwrite";
 import { createCollection } from "./database/createCollection";
-import { createPermission } from './database/createPermission';
+import { createPermission } from './database/permissions/createPermission';
 import { createRule } from "./database/createRule";
 import { deleteCollection } from "./database/deleteCollection";
 import { deleteDocument } from "./database/deleteDocument";
-import { deletePermission } from './database/deletePermission';
+import { deletePermission } from './database/permissions/deletePermission';
 import { viewDocumentAsJson } from "./database/openDocument";
 import { refreshCollection } from "./database/refreshCollection";
 import { refreshCollectionsList } from "./database/refreshCollectionsList";
@@ -23,6 +23,7 @@ import { getUserLogs } from "./users/getUserLogs";
 import { openUserInConsole } from "./users/openUserInConsole";
 import { refreshUsersList } from "./users/refreshUsersList";
 import { viewUserPrefs } from "./users/viewUserPrefs";
+import { editPermission } from './database/permissions/editPermission';
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -56,7 +57,6 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("OpenDatabaseDocumentation", () => openDocumentation('database'));
     registerCommand("GetUserLogs", getUserLogs);
     registerCommand("viewDocumentAsJson", viewDocumentAsJson);
-    registerCommand("AddProject", addProject);
     registerCommand("viewCollectionAsJson", viewCollectionAsJson);
     registerCommand("createRule", createRule);
     registerCommand("removeRule", removeRule);
@@ -69,4 +69,5 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("deletePermission", deletePermission, 'database');
     registerCommand("refreshHealth", () => {}, 'health');
     registerCommand("openHealthDocumentation",  () => openDocumentation('health'));
+    registerCommand("editPermission", editPermission, 'database');
 }

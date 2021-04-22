@@ -11,7 +11,6 @@ export class Users {
         this.users = new sdk.Users(client);
     }
     public async createNewUser(context: CreateUserContext): Promise<void> {
-        ext.outputChannel?.appendLog("Creating new user" + JSON.stringify(context));
         await AppwriteCall<User, void>(this.users.create(context.email, context.password, context.name), (user) => {
             window.showInformationMessage(`Created user with id: ${user.$id}`);
         });
