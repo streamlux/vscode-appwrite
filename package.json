@@ -15,7 +15,7 @@
     ],
     "icon": "resources/AppwriteIcon.png",
     "galleryBanner": {
-        "color": "#C80000",
+        "color": "#061F2F",
         "theme": "dark"
     },
     "homepage": "https://github.com/streamlux/vscode-appwrite",
