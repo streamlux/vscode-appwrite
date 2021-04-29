@@ -14,18 +14,18 @@ From [appwrite.io](https://appwrite.io)
 
 ### View database documents right inside VS Code.
 
-[!Database feature](https://github.com/streamlux/vscode-appwrite/blob/main/media/features/database/scr2.png?raw=true)
+![Database feature](./media/features/database/scr2.png)
 
 ### Manage database collection permissions and rules.
 
-[!Database feature 2](https://github.com/streamlux/vscode-appwrite/blob/main/media/features/database/scr1.png?raw=true)
+![Database feature](./media/features/database/scr1.png)
 
 ### Create and view users, user preferences, and more.
-[!Users feature](https://github.com/streamlux/vscode-appwrite/blob/main/media/features/users/scr1.png?raw=true)
+![Users feature](./media/features/users/scr1.png)
 
 ### Quickly and easily check the health of all the Appwrite services.
 
-[!Health feature](https://github.com/streamlux/vscode-appwrite/blob/main/media/features/health/scr1.png?raw=true)
+![Health feature](./media/features/health/scr1.png)
 
 ## Requirements
 
