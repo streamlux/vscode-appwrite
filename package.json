@@ -1,6 +1,6 @@
 {
     "name": "vscode-appwrite",
-    "displayName": "vscode-appwrite",
+    "displayName": "Appwrite",
     "description": "Manage your Appwrite resources right from VS Code!",
     "version": "0.0.1",
     "engines": {
@@ -14,6 +14,16 @@
         "Other"
     ],
     "icon": "resources/AppwriteIcon.png",
+    "galleryBanner": {
+        "color": "#C80000",
+        "theme": "dark"
+    },
+    "homepage": "https://github.com/streamlux/vscode-appwrite",
+    "bugs": {
+      "url": "https://github.com/streamlux/vscode-appwrite/issues",
+      "email": "engineering@streamlux.com"
+    },
+    "license": "SEE LICENSE IN LICENSE.md",
     "activationEvents": [
         "onCommand:vscode-appwrite.Connect",
         "onView:Appwrite",
