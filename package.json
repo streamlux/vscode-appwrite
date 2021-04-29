@@ -6,12 +6,14 @@
     "engines": {
         "vscode": "^1.55.0"
     },
+    "publisher": "Streamlux",
     "repository": {
         "url": "https://github.com/streamlux/vscode-appwrite"
     },
     "categories": [
         "Other"
     ],
+    "icon": "resources/AppwriteIcon.png",
     "activationEvents": [
         "onCommand:vscode-appwrite.Connect",
         "onView:Appwrite",
