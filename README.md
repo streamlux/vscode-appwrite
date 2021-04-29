@@ -58,6 +58,8 @@ We plan on adding better multi-project support in the future.
 
 If you find issues, or want to suggest features, please file them in the issues section of the repository.
 
+This extension has not been tested with large >1000 users or documents so it may hang or slow down if you try to load collections with large amounts of documents. If this is the case please report it!
+
 ### 1.0.0
 
 Initial release of the Appwrite extension for VS Code.
@@ -66,23 +68,20 @@ The initial release only includes features for Database, Users, and Health Appwr
 
 
 -----------------------------------------------------------------------------------------------------------
-## Following extension guidelines
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+## Contributing
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+There are a couple of ways you can contribute to this repo:
 
-## Working with Markdown
+* **Ideas, feature requests and bugs**: We are open to all ideas and we want to get rid of bugs! Use the Issues section to either report a new issue, provide your ideas or contribute to existing threads.
+* **Documentation**: Found a typo or strangely worded sentences? Submit a PR!
+* **Code**: Contribute bug fixes, features or design changes:
+  * Clone the repository locally and open in VS Code.
+  * Open the terminal (press <kbd>CTRL</kbd>+ <kbd>\`</kbd>) and run `npm install`.
+  * Debug: press <kbd>F5</kbd> to start debugging the extension.
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+## License
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+[MIT](LICENSE.md)
 
 **Enjoy!**
