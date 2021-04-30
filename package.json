@@ -164,6 +164,11 @@
                 "command": "vscode-appwrite.refreshStorage",
                 "title": "Refresh storage",
                 "icon": "$(refresh)"
+            },
+            {
+                "command": "vscode-appwrite.openStorageDocumentation",
+                "title": "Open storage documentation",
+                "icon": "$(book)"
             }
         ],
         "views": {
@@ -179,10 +184,6 @@
                 {
                     "id": "Storage",
                     "name": "Storage"
-                },
-                {
-                    "id": "Functions",
-                    "name": "Functions"
                 },
                 {
                     "id": "Health",
@@ -240,6 +241,11 @@
                 },
                 {
                     "command": "vscode-appwrite.refreshStorage",
+                    "when": "view == Storage",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.openStorageDocumentation",
                     "when": "view == Storage",
                     "group": "navigation"
                 }
