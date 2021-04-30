@@ -1,14 +1,12 @@
-import { Client, Collection, CreatedCollection, CreatedRule, DatabaseClient, File, FilesList, Rule, SDK, StorageClient } from "../appwrite";
-import { CreateRuleWizardContext } from "../ui/createRuleWizard";
+import { Client, FilesList, StorageClient } from "../appwrite";
+import { AppwriteSDK } from '../constants';
 import AppwriteCall from "../utils/AppwriteCall";
-
-const sdk: SDK = require("node-appwrite");
 
 export class Storage {
     private readonly storage: StorageClient;
 
     constructor(client: Client) {
-        this.storage = new sdk.Storage(client);
+        this.storage = new AppwriteSDK.Storage(client);
     }
 
     public async listFiles(): Promise<FilesList | undefined> {

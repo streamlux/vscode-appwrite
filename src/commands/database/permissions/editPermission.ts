@@ -1,8 +1,11 @@
-import { window } from 'vscode';
-import { databaseClient } from '../../../client';
-import { PermissionTreeItem } from '../../../tree/database/settings/PermissionTreeItem';
+import { window } from "vscode";
+import { databaseClient } from "../../../client";
+import { PermissionTreeItem } from "../../../tree/database/settings/PermissionTreeItem";
 
 export async function editPermission(treeItem: PermissionTreeItem): Promise<void> {
+    if (!databaseClient) {
+        return;
+    }
     const editedPermission = await window.showInputBox({
         value: treeItem.permission,
     });

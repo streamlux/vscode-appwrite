@@ -5,6 +5,11 @@ import { createRuleWizard } from "../../ui/createRuleWizard";
 import { refreshTree } from '../../utils/refreshTree';
 
 export async function createRule(rulesTreeItem: RulesTreeItem): Promise<void> {
+
+    if (!databaseClient) {
+        return;
+    }
+
     const ruleContext = await createRuleWizard();
     const collection = rulesTreeItem.parent.collection;
 

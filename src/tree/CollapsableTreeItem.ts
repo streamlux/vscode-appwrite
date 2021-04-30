@@ -1,6 +1,5 @@
-import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
+import { TreeItem, TreeItemCollapsibleState } from "vscode";
 import { AppwriteTreeItemBase } from "../ui/AppwriteTreeItemBase";
-import { ChildTreeItem } from "./ChildTreeItem";
 
 export class CollapsableTreeItem<Parent> extends AppwriteTreeItemBase<Parent> {
     constructor(parent: Parent, item: Partial<TreeItem> & { label: string }, private readonly children: TreeItem[], public readonly brand?: string) {

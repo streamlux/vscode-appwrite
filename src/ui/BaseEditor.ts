@@ -93,7 +93,7 @@ export abstract class BaseEditor<ContextT> implements vscode.Disposable {
     }
 
     private async updateEditor(data: string, textEditor?: vscode.TextEditor): Promise<void> {
-        if (!!textEditor) {
+        if (textEditor) {
             await BaseEditor.writeToEditor(textEditor, data);
             this.ignoreSave = true;
             try {

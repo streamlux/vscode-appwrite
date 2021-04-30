@@ -1,14 +1,12 @@
-import { Client, Collection, CreatedCollection, CreatedRule, DatabaseClient, Rule, SDK } from "../appwrite";
-import { CreateRuleWizardContext } from "../ui/createRuleWizard";
+import { Client, Collection, CreatedCollection, CreatedRule, DatabaseClient, Rule } from "../appwrite";
+import { AppwriteSDK } from '../constants';
 import AppwriteCall from "../utils/AppwriteCall";
-
-const sdk: SDK = require("node-appwrite");
 
 export class Database {
     private readonly database: DatabaseClient;
 
     constructor(client: Client) {
-        this.database = new sdk.Database(client);
+        this.database = new AppwriteSDK.Database(client);
     }
 
     public async getCollection(collectionId: string): Promise<Collection | undefined> {

@@ -1,13 +1,13 @@
-import { initAppwriteClient } from "../client";
+import { createAppwriteClient } from "../client";
 import { addProjectConfiguration } from '../settings';
 import { addProjectWizard } from "../ui/AddProjectWizard";
 import { refreshTree } from '../utils/refreshTree';
 
-export async function connectAppwrite() {
+export async function connectAppwrite():  Promise<void> {
     const projectConfiguration = await addProjectWizard();
     if (projectConfiguration) {
         addProjectConfiguration(projectConfiguration);
-        initAppwriteClient(projectConfiguration);
+        createAppwriteClient(projectConfiguration);
         refreshTree();
     }
 }

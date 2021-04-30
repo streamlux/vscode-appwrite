@@ -1,4 +1,3 @@
-import { TreeItem } from "vscode";
 import { Rule } from "../../../appwrite";
 import { ChildTreeItem } from "../../ChildTreeItem";
 import { RulesTreeItem } from "./RulesTreeItem";

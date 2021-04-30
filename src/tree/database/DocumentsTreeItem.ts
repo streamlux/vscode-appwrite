@@ -9,13 +9,12 @@ import { CollectionTreeItem } from "./CollectionTreeItem";
 import { DocumentTreeItem } from "./DocumentTreeItem";
 
 export class DocumentsTreeItem extends AppwriteTreeItemBase<CollectionTreeItem> {
-    window: any;
     constructor(parent: CollectionTreeItem) {
         super(parent, "Documents");
     }
 
     public async getChildren(): Promise<TreeItem[]> {
-        let databaseSdk = new AppwriteSDK.Database(client);
+        const databaseSdk = new AppwriteSDK.Database(client);
         const documentList = await AppwriteCall<DocumentsList>(databaseSdk.listDocuments(this.parent.collection.$id));
         if (documentList === undefined) {
             return [];

@@ -1,5 +1,4 @@
 import { QuickPickItem, window } from "vscode";
-import { AppwriteProjectConfiguration } from "../settings";
 
 export type CreateRuleWizardContext = {
     label: string;

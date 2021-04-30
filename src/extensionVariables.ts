@@ -1,4 +1,4 @@
-import { ExtensionContext, OutputChannel } from "vscode";
+import { ExtensionContext } from "vscode";
 import { DatabaseTreeItemProvider } from './tree/database/DatabaseTreeItemProvider';
 import { HealthTreeItemProvider } from './tree/health/HealthTreeItemProvider';
 import { ProjectsTreeItemProvider } from './tree/projects/ProjectsTreeItemProvider';

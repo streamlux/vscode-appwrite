@@ -5,6 +5,9 @@ import { DialogResponses } from "../../ui/DialogResponses";
 import { refreshTree } from "../../utils/refreshTree";
 
 export async function deleteUser(userTreeItem: UserTreeItem): Promise<void> {
+    if (!usersClient) {
+        return;
+    }
     const user = userTreeItem.user;
     const userId = user.$id;
     const shouldDeleteUser = await window.showWarningMessage(

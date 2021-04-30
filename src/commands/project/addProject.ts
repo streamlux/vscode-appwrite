@@ -1,12 +1,12 @@
 import { window } from "vscode";
-import { initAppwriteClient } from "../../client";
+import { createAppwriteClient } from '../../client';
 import { addProjectWizard } from "../../ui/AddProjectWizard";
 
-export async function addProject() {
+export async function addProject(): Promise<void> {
     const projectConfiguration = await addProjectWizard();
 
     if (projectConfiguration) {
-        initAppwriteClient(projectConfiguration);
+        createAppwriteClient(projectConfiguration);
     }
 
     window.showInformationMessage("Connected to Appwrite project.");

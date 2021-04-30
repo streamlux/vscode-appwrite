@@ -1,5 +1,5 @@
 import { ext } from "../../extensionVariables";
 
-export async function refreshUsersList() {
+export async function refreshUsersList(): Promise<void> {
     ext.tree?.users?.refresh();
 }

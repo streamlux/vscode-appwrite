@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import { getActiveProjectId, getAppwriteProjects } from '../../settings';
-import { ProjectTreeItem } from './ProjectTreeItem';
+import { getActiveProjectId, getAppwriteProjects } from "../../settings";
+import { ProjectTreeItem } from "./ProjectTreeItem";
 
 export class ProjectsTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | void> = new vscode.EventEmitter<
@@ -9,7 +9,13 @@ export class ProjectsTreeItemProvider implements vscode.TreeDataProvider<vscode.
 
     readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | void> = this._onDidChangeTreeData.event;
 
-    constructor() {}
+    constructor() {
+        vscode.workspace.onDidChangeConfiguration((e) => {
+            if (e.affectsConfiguration("appwrite")) {
+                this.refresh();
+            }
+        });
+    }
 
     refresh(): void {
         this._onDidChangeTreeData.fire();
@@ -19,7 +25,7 @@ export class ProjectsTreeItemProvider implements vscode.TreeDataProvider<vscode.
         return element;
     }
 
-    async getChildren(element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
+    async getChildren(_element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
         const configs = await getAppwriteProjects();
         if (configs === undefined || configs.length === 0) {
             return [];
