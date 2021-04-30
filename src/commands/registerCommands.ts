@@ -70,4 +70,5 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("refreshHealth", () => {}, 'health');
     registerCommand("openHealthDocumentation",  () => openDocumentation('health'));
     registerCommand("editPermission", editPermission, 'database');
+    registerCommand("refreshStorage", () => {}, 'storage');
 }
