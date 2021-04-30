@@ -1,14 +1,15 @@
 import { AppwriteTree, ext } from "../extensionVariables";
 
-export function refreshTree(tree?: keyof AppwriteTree): void {
-    if (tree !== undefined) {
+export function refreshTree(...trees: (keyof AppwriteTree)[]): void {
+    trees.forEach((tree) => {
         ext.tree?.[tree]?.refresh();
-        return;
-    }
+    });
+}
 
+export function refreshAllViews(): void {
     if (ext.tree) {
-        Object.values(ext.tree).forEach((treeView) => {
-            treeView?.refresh();
+        Object.keys(ext.tree).forEach((tree) => {
+            refreshTree(tree as keyof AppwriteTree);
         });
     }
 }
