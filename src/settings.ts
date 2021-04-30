@@ -6,6 +6,7 @@ export type AppwriteProjectConfiguration = {
     endpoint: string;
     console?: string;
     projectId: string;
+    selfSigned: boolean;
     secret: string;
 };
 

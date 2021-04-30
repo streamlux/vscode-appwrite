@@ -6,6 +6,7 @@ import * as dayjs from "dayjs";
 import * as localizedFormat from "dayjs/plugin/localizedFormat";
 import { healthTooltips } from "../../appwrite/Health";
 import { AppwriteHealth } from "../../appwrite";
+import { promiseWithTimeout } from "../../utils/promiseWithTimeout";
 // dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
 
@@ -27,14 +28,16 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
     }
 
     async getChildren(element?: HealthTreeItem): Promise<vscode.TreeItem[]> {
-
         if (healthClient === undefined) {
             return [];
         }
 
         // get children for root
         if (element === undefined) {
-            const health = await healthClient.checkup();
+            const health = await promiseWithTimeout<AppwriteHealth | undefined>(10000, async () => await healthClient?.checkup(), 'Health request timed out');
+            if (health === undefined) {
+                return [];
+            }
             ext.outputChannel?.append(JSON.stringify(health, null, 4));
             const healthItems = Object.entries(health).map(([service, status]) => {
                 return new HealthTreeItem(service, status, healthTooltips[service as keyof AppwriteHealth]);

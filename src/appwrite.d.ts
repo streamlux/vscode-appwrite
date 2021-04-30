@@ -243,18 +243,18 @@ type Membership = {
 };
 
 export type FilesList = {
-  sum: number;
-  files: File[];
+    sum: number;
+    files: File[];
 };
 
 export type File = {
-  '$id': string;
-  '$permissions': Permissions;
-  name: string;
-  dateCreated: number;
-  signature: string;
-  mimeType: string;
-  sizeOriginal: number;
+    $id: string;
+    $permissions: Permissions;
+    name: string;
+    dateCreated: number;
+    signature: string;
+    mimeType: string;
+    sizeOriginal: number;
 };
 
 export type Collection = {
@@ -266,14 +266,14 @@ export type Collection = {
     rules: Rule[];
 };
 
-export type CreatedCollection = Partial<Collection> & Pick<Collection, 'name'>;
+export type CreatedCollection = Partial<Collection> & Pick<Collection, "name">;
 
 export type CollectionsList = {
     sum: number;
     collections: Collection[];
 };
 
-export type CreatedRule = Omit<Rule, '$id' | '$collection' | 'default' | 'list'>;
+export type CreatedRule = Omit<Rule, "$id" | "$collection" | "default" | "list">;
 
 export type Rule = {
     $id: string;
@@ -299,6 +299,7 @@ export type Client = {
     setProject: (projectId: string) => Client;
     // Your secret API key
     setKey: (key: string) => Client;
+    setSelfSigned: (value: boolean) => void;
 };
 export type UsersClient = {
     deleteUser: (id: string) => Promise<any>;
@@ -358,7 +359,7 @@ export type StorageClient = {
     createFile: (file: any, read: string[], write: string[]) => Promise<any>;
     listFiles: () => Promise<any>;
     getFile: (fileId: string) => Promise<any>;
-}
+};
 
 export type SDK = {
     Client: new () => Client;

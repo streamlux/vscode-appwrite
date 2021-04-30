@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.6] - 2021-4-30
+### Fixed
+- Fixed a bug where the extension could not connect to Appwrite instances over localhost beacuse of self-signed certificates.
+
 ## [0.0.5] - 2021-4-30
 ### Fixed
 - Sometimes views would not refresh after adding/removing a project [PR](https://github.com/streamlux/vscode-appwrite/pull/7)
