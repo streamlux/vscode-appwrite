@@ -1,8 +1,6 @@
 import { window } from "vscode";
 import { databaseClient } from "../../../client";
-import { CollapsableTreeItem } from "../../../tree/CollapsableTreeItem";
 import { PermissionsTreeItem } from "../../../tree/database/settings/PermissionsTreeItem";
-import { PermissionTreeItem } from "../../../tree/database/settings/PermissionTreeItem";
 
 export type CreatePermissionWizardContext = {
     kind: "read" | "write";

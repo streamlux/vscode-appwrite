@@ -8,13 +8,35 @@
     "plugins": [
         "@typescript-eslint"
     ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "rules": {
         "@typescript-eslint/naming-convention": "off",
         "@typescript-eslint/semi": "warn",
         "curly": "warn",
         "eqeqeq": "warn",
         "no-throw-literal": "warn",
-        "semi": "off"
+        "semi": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "no-unused-vars": "off",
+        "no-useless-escape": "off",
+        "no-inner-declarations": "off",
+        "no-case-declarations": "off",
+        "@typescript-eslint/prefer-regexp-exec": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/unbound-method": "off",
+        "@typescript-eslint/no-unnecessary-type-assertion": "off",
+        "@typescript-eslint/restrict-template-expressions": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     },
     "ignorePatterns": [
         "**/*.d.ts"

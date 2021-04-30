@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { createAppwriteClient } from "./client";
 import { registerCommands } from "./commands/registerCommands";
 import { ext } from "./extensionVariables";
-import { getActiveProjectConfiguration, getActiveProjectId, getDefaultProject } from "./settings";
+import { getActiveProjectConfiguration } from "./settings";
 import { DatabaseTreeItemProvider } from "./tree/database/DatabaseTreeItemProvider";
 import { HealthTreeItemProvider } from "./tree/health/HealthTreeItemProvider";
 import { ProjectsTreeItemProvider } from "./tree/projects/ProjectsTreeItemProvider";
@@ -39,5 +39,3 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
     registerCommands(context);
 }
-
-export function deactivate() {}

@@ -9,8 +9,6 @@ export class StorageTreeItemProvider implements vscode.TreeDataProvider<vscode.T
 
     readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | void> = this._onDidChangeTreeData.event;
 
-    constructor() {}
-
     refresh(): void {
         this._onDidChangeTreeData.fire();
     }
@@ -19,7 +17,7 @@ export class StorageTreeItemProvider implements vscode.TreeDataProvider<vscode.T
         return element;
     }
 
-    async getChildren(element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
+    async getChildren(_element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
         if (storageClient === undefined) {
             return [];
         }

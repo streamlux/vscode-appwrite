@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { client } from "../../client";
 import AppwriteCall from "../../utils/AppwriteCall";
-import { Collection, CollectionsList, DocumentsList } from "../../appwrite";
+import { Collection, CollectionsList } from "../../appwrite";
 import { CollectionTreeItem } from "./CollectionTreeItem";
 import { AppwriteSDK } from "../../constants";
 import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
@@ -13,8 +13,6 @@ export class DatabaseTreeItemProvider implements vscode.TreeDataProvider<vscode.
     >();
 
     readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | void> = this._onDidChangeTreeData.event;
-
-    constructor() {}
 
     refresh(): void {
         ext.outputChannel?.appendLine('refresh database');
@@ -39,7 +37,7 @@ export class DatabaseTreeItemProvider implements vscode.TreeDataProvider<vscode.
             return parent.getChildren?.() ?? [];
         }
 
-        let databaseSdk = new AppwriteSDK.Database(client);
+        const databaseSdk = new AppwriteSDK.Database(client);
 
         const collectionsList = await AppwriteCall<CollectionsList, CollectionsList>(databaseSdk.listCollections());
         if (collectionsList) {

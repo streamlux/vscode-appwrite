@@ -6,7 +6,7 @@
 import { OutputChannel, ViewColumn, window, workspace, WorkspaceConfiguration } from "vscode";
 
 // tslint:disable-next-line: export-name
-export function createAppwriteOutputChannel(name: string, extensionPrefix: string) {
+export function createAppwriteOutputChannel(name: string, extensionPrefix: string): AppwriteOutputChannel {
     return new AppwriteOutputChannel(name, extensionPrefix);
 }
 
@@ -50,8 +50,8 @@ export class AppwriteOutputChannel {
 
     public show(preserveFocus?: boolean | undefined): void;
     public show(column?: ViewColumn | undefined, preserveFocus?: boolean | undefined): void;
-    // tslint:disable-next-line: no-any
-    public show(_column?: any, preserveFocus?: boolean | undefined): void {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public show(_column?: unknown, preserveFocus?: boolean | undefined): void {
         this._outputChannel.show(preserveFocus);
     }
 

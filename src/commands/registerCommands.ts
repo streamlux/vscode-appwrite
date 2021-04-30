@@ -1,5 +1,5 @@
 import { commands, ExtensionContext } from "vscode";
-import { AppwriteTree, ext } from "../extensionVariables";
+import { AppwriteTree } from "../extensionVariables";
 import { refreshAllViews, refreshTree } from "../utils/refreshTree";
 import { connectAppwrite } from "./connectAppwrite";
 import { createCollection } from "./database/createCollection";
@@ -86,11 +86,11 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("editPermission", editPermission, "database");
 
     /** Health **/
-    registerCommand("refreshHealth", () => {}, "health");
+    registerCommand("refreshHealth", undefined, "health");
     registerCommand("openHealthDocumentation", () => openDocumentation("health"));
 
     /** Storage **/
-    registerCommand("refreshStorage", () => {}, "storage");
+    registerCommand("refreshStorage", undefined, "storage");
     registerCommand("openStorageDocumentation", () => openDocumentation("storage"));
 
     /** Projects **/

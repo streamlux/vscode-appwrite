@@ -1,12 +1,11 @@
 import { MarkdownString } from 'vscode';
-import { AppwriteHealth, Client, HealthClient, SDK } from "../appwrite";
-const sdk: SDK = require("node-appwrite");
-
+import { AppwriteHealth, Client, HealthClient } from "../appwrite";
+import { AppwriteSDK } from '../constants';
 export class Health {
     private readonly health: HealthClient;
 
     constructor(client: Client) {
-        this.health = new sdk.Health(client);
+        this.health = new AppwriteSDK.Health(client);
     }
 
     /**

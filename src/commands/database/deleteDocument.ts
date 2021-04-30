@@ -13,7 +13,7 @@ export async function deleteDocument(documentTreeItem: DocumentTreeItem): Promis
         const shouldDelete = await confirmDialog(`Delete document "${document["$id"]}" from ${collection.name}?`);
         if (shouldDelete) {
             await databaseClient.deleteDocument(collection.$id, document["$id"]);
-            documentTreeItem.parent.window.showInformationMessage(`Deleted document "${document["$id"]}" from ${collection.name}.`);
+            window.showInformationMessage(`Deleted document "${document["$id"]}" from ${collection.name}.`);
         }
     } catch (e) {
         window.showErrorMessage(e);

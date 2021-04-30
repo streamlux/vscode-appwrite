@@ -1,14 +1,13 @@
 import { window } from "vscode";
-import { Client, Log, SDK, User, UsersClient } from "../appwrite";
-import { ext } from "../extensionVariables";
+import { Client, Log, User, UsersClient } from "../appwrite";
+import { AppwriteSDK } from "../constants";
 import AppwriteCall from "../utils/AppwriteCall";
-const sdk: SDK = require("node-appwrite");
 
 export class Users {
     private readonly users: UsersClient;
 
     constructor(client: Client) {
-        this.users = new sdk.Users(client);
+        this.users = new AppwriteSDK.Users(client);
     }
     public async createNewUser(context: CreateUserContext): Promise<void> {
         await AppwriteCall<User, void>(this.users.create(context.email, context.password, context.name), (user) => {
@@ -23,7 +22,7 @@ export class Users {
     }
 
     public async getLogs(userId: string): Promise<Log[]> {
-        return await AppwriteCall<Log[], Log[]>(this.users.getLogs(userId)) ?? [];
+        return (await AppwriteCall<Log[], Log[]>(this.users.getLogs(userId))) ?? [];
     }
 }
 

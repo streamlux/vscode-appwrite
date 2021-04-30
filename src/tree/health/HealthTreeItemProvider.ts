@@ -3,14 +3,11 @@ import { healthClient } from "../../client";
 import { ext } from "../../extensionVariables";
 import { HealthTreeItem } from "./HealthTreeItem";
 import * as dayjs from "dayjs";
-import * as relativeTime from "dayjs/plugin/relativeTime";
 import * as localizedFormat from "dayjs/plugin/localizedFormat";
 import { healthTooltips } from "../../appwrite/Health";
 import { AppwriteHealth } from "../../appwrite";
 // dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
-
-type PartialRecord<K extends string | number | symbol, T> = { [P in K]?: T };
 
 export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<HealthTreeItem | undefined | void> = new vscode.EventEmitter<
@@ -20,8 +17,6 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
     private lastChecked: Date = new Date();
 
     readonly onDidChangeTreeData: vscode.Event<HealthTreeItem | undefined | void> = this._onDidChangeTreeData.event;
-
-    constructor() {}
 
     refresh(): void {
         this._onDidChangeTreeData.fire();

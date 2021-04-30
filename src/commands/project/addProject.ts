@@ -2,7 +2,7 @@ import { window } from "vscode";
 import { createAppwriteClient } from '../../client';
 import { addProjectWizard } from "../../ui/AddProjectWizard";
 
-export async function addProject() {
+export async function addProject(): Promise<void> {
     const projectConfiguration = await addProjectWizard();
 
     if (projectConfiguration) {

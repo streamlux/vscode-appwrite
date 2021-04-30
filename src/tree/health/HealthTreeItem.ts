@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { MarkdownString } from 'vscode';
 
 export class HealthTreeItem extends vscode.TreeItem {
-    constructor(public readonly label: string, status: any, tooltip?: string | MarkdownString | undefined) {
+    constructor(public readonly label: string, status: "check" | "error" | any, tooltip?: string | MarkdownString | undefined) {
         super(label);
         console.log(status);
         this.label = label;

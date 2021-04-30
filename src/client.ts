@@ -1,11 +1,10 @@
-import { Client, SDK } from "./appwrite";
+import { Client } from "./appwrite";
 import { Database } from "./appwrite/Database";
 import { Health } from "./appwrite/Health";
 import { Storage } from "./appwrite/Storage";
 import { Users } from "./appwrite/Users";
+import { AppwriteSDK } from "./constants";
 import { AppwriteProjectConfiguration } from "./settings";
-
-const sdk: SDK = require("node-appwrite");
 
 export let client: Client;
 export let clientConfig: { endpoint: string; projectId: string; secret: string };
@@ -15,7 +14,7 @@ export let databaseClient: Database | undefined;
 export let storageClient: Storage | undefined;
 
 function initAppwriteClient({ endpoint, projectId, secret }: AppwriteProjectConfiguration) {
-    client = new sdk.Client();
+    client = new AppwriteSDK.Client();
     clientConfig = { endpoint, projectId, secret };
     client.setEndpoint(endpoint).setProject(projectId).setKey(secret);
 
@@ -27,7 +26,7 @@ function initAppwriteClient({ endpoint, projectId, secret }: AppwriteProjectConf
     return client;
 }
 
-export function createAppwriteClient(config?: AppwriteProjectConfiguration) {
+export function createAppwriteClient(config?: AppwriteProjectConfiguration): void {
     if (config) {
         initAppwriteClient(config);
         return;

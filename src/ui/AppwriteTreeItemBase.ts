@@ -1,4 +1,4 @@
-import { TreeDataProvider, TreeItem } from "vscode";
+import { TreeItem } from "vscode";
 
 export abstract class AppwriteTreeItemBase<Parent = void> extends TreeItem {
     constructor(public readonly parent: Parent, label: string) {

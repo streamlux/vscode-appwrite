@@ -1,4 +1,3 @@
-import { AppwriteTreeItemBase } from "../../../ui/AppwriteTreeItemBase";
 import { ChildTreeItem } from "../../ChildTreeItem";
 import { PermissionsTreeItem } from "./PermissionsTreeItem";
 
