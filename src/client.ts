@@ -13,10 +13,10 @@ export let healthClient: Health | undefined;
 export let databaseClient: Database | undefined;
 export let storageClient: Storage | undefined;
 
-function initAppwriteClient({ endpoint, projectId, secret }: AppwriteProjectConfiguration) {
+function initAppwriteClient({ endpoint, projectId, secret, selfSigned }: AppwriteProjectConfiguration) {
     client = new AppwriteSDK.Client();
     clientConfig = { endpoint, projectId, secret };
-    client.setEndpoint(endpoint).setProject(projectId).setKey(secret);
+    client.setEndpoint(endpoint).setProject(projectId).setKey(secret).setSelfSigned(selfSigned);
 
     usersClient = new Users(client);
     healthClient = new Health(client);

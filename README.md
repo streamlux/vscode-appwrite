@@ -58,6 +58,7 @@ After connecting to an Appwrite project, your `appwrite.projects` setting will c
             "endpoint": "https://[Domain]/v1",
             "projectId": "[Project ID]",
             "secret": "API key with all scopes",
+            "selfSigned": "boolean", // set to true if you're connecting to Appwrite over localhost
             "nickname": "My project"
 }
 ```
