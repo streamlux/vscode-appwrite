@@ -169,6 +169,25 @@
                 "command": "vscode-appwrite.openStorageDocumentation",
                 "title": "Open storage documentation",
                 "icon": "$(book)"
+            },
+            {
+                "command": "vscode-appwrite.addProject",
+                "title": "Add Appwrite project",
+                "icon": "$(plus)"
+            },
+            {
+                "command": "vscode-appwrite.setActiveProject",
+                "title": "Set as active"
+            },
+            {
+                "command": "vscode-appwrite.refreshProjects",
+                "title": "Refresh projects",
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "vscode-appwrite.removeProject",
+                "title": "Remove project",
+                "icon": "$(trash)"
             }
         ],
         "views": {
@@ -188,6 +207,10 @@
                 {
                     "id": "Health",
                     "name": "Health"
+                },
+                {
+                    "id": "Projects",
+                    "name": "Projects"
                 }
             ]
         },
@@ -195,6 +218,10 @@
             {
                 "view": "Users",
                 "contents": "Connect to Appwrite to get started.\n[Connect to Appwrite](command:vscode-appwrite.Connect)"
+            },
+            {
+                "view": "Projects",
+                "contents": "Add an Appwrite project to get started.\n[Connect to Appwrite](command:vscode-appwrite.Connect)"
             }
         ],
         "menus": {
@@ -247,6 +274,16 @@
                 {
                     "command": "vscode-appwrite.openStorageDocumentation",
                     "when": "view == Storage",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.refreshProjects",
+                    "when": "view == Projects",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.addProject",
+                    "when": "view == Projects",
                     "group": "navigation"
                 }
             ],
@@ -337,6 +374,15 @@
                     "command": "vscode-appwrite.deletePermission",
                     "when": "viewItem =~ /^(permission)$/",
                     "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.setActiveProject",
+                    "when": "viewItem =~ /^(appwriteProject)$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.removeProject",
+                    "when": "viewItem =~ /(appwriteProject)/"
                 }
             ],
             "commandPalette": [
@@ -428,6 +474,11 @@
                     "type": "array",
                     "default": [],
                     "markdownDescription": "List of Appwrite project configurations. You can use the Connect command to set this up, or see [docs](https://github.com/streamlux/vscode-appwrite/) for more information."
+                },
+                "appwrite.activeProjectId": {
+                    "type": "string",
+                    "default": "",
+                    "markdownDescription": "Project id of the active project, see [docs](https://github.com/streamlux/vscode-appwrite/) for more information."
                 }
             }
         }

@@ -1,6 +1,6 @@
 import { commands, ExtensionContext } from "vscode";
 import { AppwriteTree, ext } from "../extensionVariables";
-import { refreshTree } from "../utils/refreshTree";
+import { refreshAllViews, refreshTree } from "../utils/refreshTree";
 import { connectAppwrite } from "./connectAppwrite";
 import { createCollection } from "./database/createCollection";
 import { createPermission } from "./database/permissions/createPermission";
@@ -14,7 +14,6 @@ import { refreshCollectionsList } from "./database/refreshCollectionsList";
 import { removeRule } from "./database/removeRule";
 import { viewCollectionAsJson } from "./database/viewCollectionAsJson";
 import { openDocumentation } from "./openDocumentation";
-import { addProject } from "./project/addProject";
 import { copyUserEmail } from "./users/copyUserEmail";
 import { copyUserId } from "./users/copyUserId";
 import { createUser } from "./users/createUser";
@@ -24,6 +23,8 @@ import { openUserInConsole } from "./users/openUserInConsole";
 import { refreshUsersList } from "./users/refreshUsersList";
 import { viewUserPrefs } from "./users/viewUserPrefs";
 import { editPermission } from "./database/permissions/editPermission";
+import { setActiveProject } from "./project/setActiveProject";
+import { removeProject } from './project/removeProject';
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -36,11 +37,21 @@ class CommandRegistrar {
 
 export function registerCommands(context: ExtensionContext): void {
     const registrar = new CommandRegistrar(context);
-    const registerCommand = (commandId: string, callback: (...args: any[]) => any, refresh?: keyof AppwriteTree) => {
+    const registerCommand = (
+        commandId: string,
+        callback?: (...args: any[]) => any,
+        refresh?: keyof AppwriteTree | (keyof AppwriteTree)[] | "all"
+    ) => {
         registrar.registerCommand(`vscode-appwrite.${commandId}`, async (...args: any[]) => {
-            await callback(...args);
-            if (refresh) {
-                refreshTree(refresh);
+            await callback?.(...args);
+            if (refresh !== undefined) {
+                if (refresh === "all") {
+                    refreshAllViews();
+                } else if (typeof refresh === "string") {
+                    refreshTree(refresh);
+                } else {
+                    refreshTree(...refresh);
+                }
             }
         });
     };
@@ -81,4 +92,10 @@ export function registerCommands(context: ExtensionContext): void {
     /** Storage **/
     registerCommand("refreshStorage", () => {}, "storage");
     registerCommand("openStorageDocumentation", () => openDocumentation("storage"));
+
+    /** Projects **/
+    registerCommand("addProject", connectAppwrite, "all");
+    registerCommand("setActiveProject", setActiveProject, "all");
+    registerCommand("refreshProjects", undefined, "projects");
+    registerCommand("removeProject", removeProject, "all");
 }

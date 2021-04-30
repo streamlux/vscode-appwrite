@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { storageClient } from "../../client";
-import { FileTreeItem } from "./FileTreeItem";
+import { getActiveProjectId, getAppwriteProjects } from '../../settings';
+import { ProjectTreeItem } from './ProjectTreeItem';
 
-export class StorageTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
+export class ProjectsTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | void> = new vscode.EventEmitter<
         vscode.TreeItem | undefined | void
     >();
@@ -20,11 +20,11 @@ export class StorageTreeItemProvider implements vscode.TreeDataProvider<vscode.T
     }
 
     async getChildren(element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
-        const files = await storageClient.listFiles();
-        if (files === undefined || files?.files.length === 0) {
-            const noStorage = new vscode.TreeItem('No files found');
-            return [noStorage];
+        const configs = await getAppwriteProjects();
+        if (configs === undefined || configs.length === 0) {
+            return [];
         }
-        return files.files.map((file) => new FileTreeItem(file));
+        const activeProjectId = await getActiveProjectId();
+        return configs.map((config) => new ProjectTreeItem(config, config.projectId === activeProjectId));
     }
 }

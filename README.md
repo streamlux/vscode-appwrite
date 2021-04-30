@@ -14,6 +14,10 @@ From [appwrite.io](https://appwrite.io)
 
 ## Features
 
+### Connect to multiple Appwrite projects
+
+![Mutliple projects](media/features/projects/projectsView1.gif)
+
 ### View database documents right inside VS Code.
 
 ![Database feature](media/features/database/scr2.png)
