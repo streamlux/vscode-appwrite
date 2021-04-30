@@ -20,8 +20,8 @@
     },
     "homepage": "https://github.com/streamlux/vscode-appwrite",
     "bugs": {
-      "url": "https://github.com/streamlux/vscode-appwrite/issues",
-      "email": "engineering@streamlux.com"
+        "url": "https://github.com/streamlux/vscode-appwrite/issues",
+        "email": "engineering@streamlux.com"
     },
     "license": "SEE LICENSE IN LICENSE.md",
     "activationEvents": [
@@ -159,6 +159,11 @@
                 "command": "vscode-appwrite.openHealthDocumentation",
                 "title": "Open health documentation",
                 "icon": "$(book)"
+            },
+            {
+                "command": "vscode-appwrite.refreshStorage",
+                "title": "Refresh storage",
+                "icon": "$(refresh)"
             }
         ],
         "views": {
@@ -231,6 +236,11 @@
                 {
                     "command": "vscode-appwrite.openHealthDocumentation",
                     "when": "view == Health",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.refreshStorage",
+                    "when": "view == Storage",
                     "group": "navigation"
                 }
             ],
