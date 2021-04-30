@@ -34,7 +34,10 @@ export async function addProjectWizard(): Promise<AppwriteProjectConfiguration |
             { label: "Yes", description: "If running Appwrite on localhost, or local IP" },
             { label: "No", description: "If connecting to a remote Appwrite instance" },
         ],
-        { placeHolder: "Allow communication with self-signed SSL certificates? (Select 'Yes' for connecting to Appwrite on localhost)" }
+        {
+            placeHolder: "Allow communication with self-signed SSL certificates? (Select 'Yes' for connecting to Appwrite on localhost)",
+            ignoreFocusOut: true,
+        }
     );
     if (selfSigned === undefined) {
         return;
