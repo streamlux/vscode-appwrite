@@ -2,6 +2,9 @@ import { databaseClient } from "../../../client";
 import { PermissionTreeItem } from "../../../tree/database/settings/PermissionTreeItem";
 
 export async function deletePermission(treeItem: PermissionTreeItem): Promise<void> {
+    if (!databaseClient) {
+        return;
+    }
     const collection = treeItem.parent.parent.collection;
     const kind = treeItem.kind;
 

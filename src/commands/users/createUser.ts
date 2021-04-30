@@ -3,6 +3,9 @@ import { usersClient } from '../../client';
 import { ext } from '../../extensionVariables';
 
 export async function createUser(): Promise<void> {
+    if (!usersClient) {
+        return;
+    }
     const email = await window.showInputBox({
         ignoreFocusOut: true,
         placeHolder: "jane.doe@hotmail.com",

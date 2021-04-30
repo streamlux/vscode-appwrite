@@ -4,6 +4,9 @@ import { DocumentTreeItem } from "../../tree/database/DocumentTreeItem";
 import { confirmDialog } from "../../ui/confirmDialog";
 
 export async function deleteDocument(documentTreeItem: DocumentTreeItem): Promise<void> {
+    if (!databaseClient) {
+        return;
+    }
     const document = documentTreeItem.document;
     const collection = documentTreeItem.parent.parent.collection;
     try {

@@ -1,6 +1,6 @@
 import { window } from "vscode";
-import { databaseClient } from '../../../client';
-import { CollapsableTreeItem } from '../../../tree/CollapsableTreeItem';
+import { databaseClient } from "../../../client";
+import { CollapsableTreeItem } from "../../../tree/CollapsableTreeItem";
 import { PermissionsTreeItem } from "../../../tree/database/settings/PermissionsTreeItem";
 import { PermissionTreeItem } from "../../../tree/database/settings/PermissionTreeItem";
 
@@ -25,7 +25,9 @@ export async function createPermissionWizard(kind?: "read" | "write"): Promise<C
 }
 
 export async function createPermission(treeItem: PermissionsTreeItem): Promise<void> {
-
+    if (!databaseClient) {
+        return;
+    }
 
     const collection = treeItem.parent.collection;
     const context = await createPermissionWizard(undefined);
@@ -37,7 +39,7 @@ export async function createPermission(treeItem: PermissionsTreeItem): Promise<v
     const read = Array.from(collection.$permissions.read);
     const write = Array.from(collection.$permissions.write);
 
-    if (context.kind === 'read') {
+    if (context.kind === "read") {
         read.push(context.permission);
     } else {
         write.push(context.permission);

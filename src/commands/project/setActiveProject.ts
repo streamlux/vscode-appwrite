@@ -1,5 +1,3 @@
-import { window } from "vscode";
-import { initAppwriteClient } from "../../client";
 import { setActiveProjectId } from '../../settings';
 import { ProjectTreeItem } from "../../tree/projects/ProjectTreeItem";
 

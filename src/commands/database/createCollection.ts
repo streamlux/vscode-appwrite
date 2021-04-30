@@ -1,13 +1,17 @@
-import { window } from 'vscode';
-import { databaseClient } from '../../client';
+import { window } from "vscode";
+import { databaseClient } from "../../client";
 
 export async function createCollection(): Promise<void> {
+    if (!databaseClient) {
+        return;
+    }
+
     const name = await window.showInputBox({
-        prompt: 'Collection name'
+        prompt: "Collection name",
     });
 
     if (name && name.length > 0) {
-        await databaseClient.createCollection({name});
+        await databaseClient.createCollection({ name });
         window.showInformationMessage(`Created collection "${name}".`);
     }
 }

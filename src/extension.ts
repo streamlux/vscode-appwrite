@@ -1,12 +1,11 @@
 import * as vscode from "vscode";
-import { workspace } from 'vscode';
-import { initAppwriteClient } from "./client";
+import { createAppwriteClient } from "./client";
 import { registerCommands } from "./commands/registerCommands";
 import { ext } from "./extensionVariables";
 import { getActiveProjectConfiguration, getActiveProjectId, getDefaultProject } from "./settings";
 import { DatabaseTreeItemProvider } from "./tree/database/DatabaseTreeItemProvider";
 import { HealthTreeItemProvider } from "./tree/health/HealthTreeItemProvider";
-import { ProjectsTreeItemProvider } from './tree/projects/ProjectsTreeItemProvider';
+import { ProjectsTreeItemProvider } from "./tree/projects/ProjectsTreeItemProvider";
 import { StorageTreeItemProvider } from "./tree/storage/StorageTreeItemProvider";
 import { UserTreeItemProvider } from "./tree/users/UserTreeItemProvider";
 import { createAppwriteOutputChannel } from "./ui/AppwriteOutputChannel";
@@ -25,9 +24,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     vscode.window.registerTreeDataProvider("Projects", projectsTreeItemProvider);
 
     const activeProject = await getActiveProjectConfiguration();
-    if (activeProject) {
-        initAppwriteClient(activeProject);
-    }
+    createAppwriteClient(activeProject);
 
     ext.context = context;
     ext.outputChannel = createAppwriteOutputChannel("Appwrite", "appwrite");
@@ -37,7 +34,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         health: healthTreeItemProvider,
         database: databaseTreeItemProvider,
         storage: storageTreeItemProvider,
-        projects: projectsTreeItemProvider
+        projects: projectsTreeItemProvider,
     };
 
     registerCommands(context);

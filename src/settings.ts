@@ -1,5 +1,5 @@
 import { workspace } from "vscode";
-import { initAppwriteClient } from "./client";
+import { createAppwriteClient } from "./client";
 
 export type AppwriteProjectConfiguration = {
     nickname?: string;
@@ -64,9 +64,7 @@ export async function setActiveProjectId(projectId: string): Promise<void> {
     const configuration = workspace.getConfiguration("appwrite");
     await configuration.update("activeProjectId", projectId, true);
     const active = await getActiveProjectConfiguration();
-    if (active) {
-        initAppwriteClient(active);
-    }
+    createAppwriteClient(active);
 }
 
 export async function updateActiveProjectId(): Promise<void> {
@@ -75,17 +73,12 @@ export async function updateActiveProjectId(): Promise<void> {
         const configuration = workspace.getConfiguration("appwrite");
         await configuration.update("activeProjectId", projects[0].projectId, true);
         const active = await getActiveProjectConfiguration();
-        if (active) {
-            initAppwriteClient(active);
-        }
+        createAppwriteClient(active);
     }
 }
 
 export async function removeProjectConfig(projectId: string): Promise<void> {
     const projects = await getAppwriteProjects();
-
-    const activeProjectId = await getActiveProjectId();
-
     const updatedProjects = projects.filter((project) => project.projectId !== projectId);
     const configuration = workspace.getConfiguration("appwrite");
     await configuration.update("projects", updatedProjects, true);

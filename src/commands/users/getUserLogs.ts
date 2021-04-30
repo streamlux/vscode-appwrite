@@ -3,6 +3,9 @@ import { UserTreeItem } from "../../tree/users/UserTreeItem";
 import { openReadOnlyJson } from '../../ui/openReadonlyContent';
 
 export async function getUserLogs(treeItem: UserTreeItem): Promise<void> {
+    if (!usersClient) {
+        return;
+    }
     const userId = treeItem.user.$id;
 
     const logs = await usersClient.getLogs(userId);
