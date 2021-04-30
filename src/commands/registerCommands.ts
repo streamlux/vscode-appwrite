@@ -24,7 +24,7 @@ import { refreshUsersList } from "./users/refreshUsersList";
 import { viewUserPrefs } from "./users/viewUserPrefs";
 import { editPermission } from "./database/permissions/editPermission";
 import { setActiveProject } from "./project/setActiveProject";
-import { removeProject } from './project/removeProject';
+import { removeProject } from "./project/removeProject";
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -57,7 +57,7 @@ export function registerCommands(context: ExtensionContext): void {
     };
 
     /** General **/
-    registerCommand("Connect", connectAppwrite);
+    registerCommand("Connect", connectAppwrite, "all");
 
     /** Users **/
     registerCommand("openUserInConsole", openUserInConsole);

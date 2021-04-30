@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
-import { getActiveProjectId, getAppwriteProjects } from '../../settings';
-import { ProjectTreeItem } from './ProjectTreeItem';
+import { getActiveProjectId, getAppwriteProjects } from "../../settings";
+import { refreshTree } from "../../utils/refreshTree";
+import { ProjectTreeItem } from "./ProjectTreeItem";
 
 export class ProjectsTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | void> = new vscode.EventEmitter<
@@ -9,7 +10,13 @@ export class ProjectsTreeItemProvider implements vscode.TreeDataProvider<vscode.
 
     readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | void> = this._onDidChangeTreeData.event;
 
-    constructor() {}
+    constructor() {
+        vscode.workspace.onDidChangeConfiguration((e) => {
+            if (e.affectsConfiguration("appwrite")) {
+                this.refresh();
+            }
+        });
+    }
 
     refresh(): void {
         this._onDidChangeTreeData.fire();

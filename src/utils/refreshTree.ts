@@ -8,8 +8,8 @@ export function refreshTree(...trees: (keyof AppwriteTree)[]): void {
 
 export function refreshAllViews(): void {
     if (ext.tree) {
-        Object.keys(ext.tree).forEach((tree) => {
+        for (const tree in ext.tree) {
             refreshTree(tree as keyof AppwriteTree);
-        });
+        }
     }
 }
