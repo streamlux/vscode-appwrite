@@ -4,6 +4,10 @@ All notable changes to the "vscode-appwrite" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [Unreleased]
+### Fixed
+- Sometimes views would not refresh after adding/removing a project [PR](https://github.com/streamlux/vscode-appwrite/pull/7)
+
 ## [0.0.4] - 2021-4-30
 
 ### Fixed
