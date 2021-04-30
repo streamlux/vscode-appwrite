@@ -70,13 +70,6 @@ If you find issues, or want to suggest features, please file them in the issues 
 
 This extension has not been tested with large >1000 users or documents so it may hang or slow down if you try to load collections with large amounts of documents. If this is the case please report it!
 
-### 1.0.0
-
-Initial release of the Appwrite extension for VS Code.
-
-The initial release only includes features for Database, Users, and Health Appwrite APIs. However support for Storage and Functions APIs is on the way.
-
-
 -----------------------------------------------------------------------------------------------------------
 
 ## Contributing
