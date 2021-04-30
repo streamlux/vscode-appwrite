@@ -3,11 +3,11 @@ import { AppwriteTree, ext } from "../extensionVariables";
 import { refreshTree } from "../utils/refreshTree";
 import { connectAppwrite } from "./connectAppwrite";
 import { createCollection } from "./database/createCollection";
-import { createPermission } from './database/permissions/createPermission';
+import { createPermission } from "./database/permissions/createPermission";
 import { createRule } from "./database/createRule";
 import { deleteCollection } from "./database/deleteCollection";
 import { deleteDocument } from "./database/deleteDocument";
-import { deletePermission } from './database/permissions/deletePermission';
+import { deletePermission } from "./database/permissions/deletePermission";
 import { viewDocumentAsJson } from "./database/openDocument";
 import { refreshCollection } from "./database/refreshCollection";
 import { refreshCollectionsList } from "./database/refreshCollectionsList";
@@ -23,7 +23,7 @@ import { getUserLogs } from "./users/getUserLogs";
 import { openUserInConsole } from "./users/openUserInConsole";
 import { refreshUsersList } from "./users/refreshUsersList";
 import { viewUserPrefs } from "./users/viewUserPrefs";
-import { editPermission } from './database/permissions/editPermission';
+import { editPermission } from "./database/permissions/editPermission";
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -45,7 +45,10 @@ export function registerCommands(context: ExtensionContext): void {
         });
     };
 
+    /** General **/
     registerCommand("Connect", connectAppwrite);
+
+    /** Users **/
     registerCommand("openUserInConsole", openUserInConsole);
     registerCommand("viewUserPrefs", viewUserPrefs);
     registerCommand("copyUserId", copyUserId);
@@ -53,22 +56,29 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("CreateUser", createUser);
     registerCommand("refreshUsersList", refreshUsersList);
     registerCommand("DeleteUser", deleteUser);
-    registerCommand("OpenUsersDocumentation", () => openDocumentation('users'));
-    registerCommand("OpenDatabaseDocumentation", () => openDocumentation('database'));
+    registerCommand("OpenUsersDocumentation", () => openDocumentation("users"));
     registerCommand("GetUserLogs", getUserLogs);
+
+    /** Database **/
+    registerCommand("OpenDatabaseDocumentation", () => openDocumentation("database"));
     registerCommand("viewDocumentAsJson", viewDocumentAsJson);
     registerCommand("viewCollectionAsJson", viewCollectionAsJson);
     registerCommand("createRule", createRule);
     registerCommand("removeRule", removeRule);
-    registerCommand("deleteDocument", deleteDocument, 'database');
-    registerCommand("deleteCollection", deleteCollection, 'database');
+    registerCommand("deleteDocument", deleteDocument, "database");
+    registerCommand("deleteCollection", deleteCollection, "database");
     registerCommand("refreshCollection", refreshCollection);
     registerCommand("refreshCollectionsList", refreshCollectionsList);
-    registerCommand("createCollection", createCollection, 'database');
-    registerCommand("createPermission", createPermission, 'database');
-    registerCommand("deletePermission", deletePermission, 'database');
-    registerCommand("refreshHealth", () => {}, 'health');
-    registerCommand("openHealthDocumentation",  () => openDocumentation('health'));
-    registerCommand("editPermission", editPermission, 'database');
-    registerCommand("refreshStorage", () => {}, 'storage');
+    registerCommand("createCollection", createCollection, "database");
+    registerCommand("createPermission", createPermission, "database");
+    registerCommand("deletePermission", deletePermission, "database");
+    registerCommand("editPermission", editPermission, "database");
+
+    /** Health **/
+    registerCommand("refreshHealth", () => {}, "health");
+    registerCommand("openHealthDocumentation", () => openDocumentation("health"));
+
+    /** Storage **/
+    registerCommand("refreshStorage", () => {}, "storage");
+    registerCommand("openStorageDocumentation", () => openDocumentation("storage"));
 }

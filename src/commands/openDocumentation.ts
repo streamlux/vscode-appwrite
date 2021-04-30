@@ -4,7 +4,8 @@ const documentationLinks = {
     home: 'https://appwrite.io/docs',
     users: 'https://appwrite.io/docs/server/users',
     database: 'https://appwrite.io/docs/client/database',
-    health: 'https://appwrite.io/docs/server/health'
+    health: 'https://appwrite.io/docs/server/health',
+    storage: 'https://appwrite.io/docs/client/storage'
 };
 
 type DocsPage = keyof typeof documentationLinks;
