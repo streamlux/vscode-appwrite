@@ -2,11 +2,9 @@
 
 <!-- region exclude-from-marketplace -->
 
-[![Version](https://vsmarketplacebadge.apphb.com/version/streamlux.vscode-appwrite.svg)](https://marketplace.visualstudio.com/items?itemName=streamlux.vscode-appwrite) [![Installs](https://vsmarketplacebadge.apphb.com/installs-short/streamlux.vscode-appwrite.svg)](https://marketplace.visualstudio.com/items?itemName=streamlux.vscode-appwrite) [![Build](https://github.com/streamlux/vscode-appwrite/actions/workflows/ciBuild.yml/badge.svg)](https://github.com/streamlux/vscode-appwrite/actions/workflows/ciBuild.yml) ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/streamlux/vscode-appwrite/ciBuild/main?label=Build)
+[![Version](https://vsmarketplacebadge.apphb.com/version/streamlux.vscode-appwrite.svg)](https://marketplace.visualstudio.com/items?itemName=streamlux.vscode-appwrite) [![Installs](https://vsmarketplacebadge.apphb.com/installs-short/streamlux.vscode-appwrite.svg)](https://marketplace.visualstudio.com/items?itemName=streamlux.vscode-appwrite)
 
 <!-- endregion exclude-from-marketplace -->
-
-https://img.shields.io/github/workflow/status/streamlux/vscode-appwrite/ciBuild/main.svg?label=Build
 
 Use the Appwrite extension to quickly monitor, manage, and interact with your Appwrite instance directly from VS Code.
 
