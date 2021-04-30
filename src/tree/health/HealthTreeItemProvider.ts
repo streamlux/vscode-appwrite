@@ -32,6 +32,11 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
     }
 
     async getChildren(element?: HealthTreeItem): Promise<vscode.TreeItem[]> {
+
+        if (healthClient === undefined) {
+            return [];
+        }
+
         // get children for root
         if (element === undefined) {
             const health = await healthClient.checkup();

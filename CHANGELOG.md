@@ -4,6 +4,11 @@ All notable changes to the "vscode-appwrite" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.3] - 2021-4-30
+
+### Fixed
+- Errors when user has no projects
+
 ## [0.0.2] - 2021-4-30
 
 ### Added

@@ -20,9 +20,13 @@ export class StorageTreeItemProvider implements vscode.TreeDataProvider<vscode.T
     }
 
     async getChildren(element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
+        if (storageClient === undefined) {
+            return [];
+        }
+
         const files = await storageClient.listFiles();
         if (files === undefined || files?.files.length === 0) {
-            const noStorage = new vscode.TreeItem('No files found');
+            const noStorage = new vscode.TreeItem("No files found");
             return [noStorage];
         }
         return files.files.map((file) => new FileTreeItem(file));
