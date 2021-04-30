@@ -1,5 +1,7 @@
 # Appwrite for Visual Studio Code
 
+[![Build](https://github.com/streamlux/vscode-appwrite/actions/workflows/ciBuild.yml/badge.svg)](https://github.com/streamlux/vscode-appwrite/actions/workflows/ciBuild.yml)
+
 Use the Appwrite extension to quickly monitor, manage, and interact with your Appwrite instance directly from VS Code.
 
 ## What is Appwrite?
