@@ -38,10 +38,15 @@ export async function getActiveProjectId(): Promise<string> {
     return projectId ?? "";
 }
 
-export async function getActiveProjectConfiguration(): Promise<AppwriteProjectConfiguration> {
+export async function getActiveProjectConfiguration(): Promise<AppwriteProjectConfiguration | undefined> {
     const configurations = await getAppwriteProjects();
     const activeConfigId = await getActiveProjectId();
     let activeConfig;
+
+    if (configurations === undefined || configurations?.length === 0) {
+        return undefined;
+    }
+
     configurations.forEach((config) => {
         if (config.projectId === activeConfigId) {
             activeConfig = config;
@@ -58,7 +63,10 @@ export async function getActiveProjectConfiguration(): Promise<AppwriteProjectCo
 export async function setActiveProjectId(projectId: string): Promise<void> {
     const configuration = workspace.getConfiguration("appwrite");
     await configuration.update("activeProjectId", projectId, true);
-    initAppwriteClient(await getActiveProjectConfiguration());
+    const active = await getActiveProjectConfiguration();
+    if (active) {
+        initAppwriteClient(active);
+    }
 }
 
 export async function updateActiveProjectId(): Promise<void> {
@@ -66,7 +74,10 @@ export async function updateActiveProjectId(): Promise<void> {
     if (projects.length > 0) {
         const configuration = workspace.getConfiguration("appwrite");
         await configuration.update("activeProjectId", projects[0].projectId, true);
-        initAppwriteClient(await getActiveProjectConfiguration());
+        const active = await getActiveProjectConfiguration();
+        if (active) {
+            initAppwriteClient(active);
+        }
     }
 }
 
