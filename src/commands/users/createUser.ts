@@ -19,7 +19,7 @@ export async function createUser(): Promise<void> {
         password: true,
         prompt: "Enter user password",
         validateInput: (value) => {
-            if (value.length <= 6) {
+            if (value.length < 6) {
                 return "Password must be at least 6 characters long.";
             }
             if (value.length > 32) {
