@@ -10,6 +10,14 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: NodeTool@0
+  displayName: 'Use Node 12.x'
+  inputs:
+    versionSpec: 12.x
+- task: Npm@1
+  displayName: 'npm ci'
+  inputs:
+    command: ci
 - script: npm run package
   displayName: package
 - script: vsce package
