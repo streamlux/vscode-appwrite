@@ -20,7 +20,7 @@ steps:
     command: ci
 - script: npm run package
   displayName: package
-- script: vsce package
+- script: npx vsce package
 
 - task: CopyFiles@2
   displayName: 'Copy vsix to staging directory'
