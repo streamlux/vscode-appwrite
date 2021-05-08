@@ -1,0 +1,28 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: npm run package
+  displayName: package
+- script: vsce package
+
+- task: CopyFiles@2
+  displayName: 'Copy vsix to staging directory'
+  inputs:
+    Contents: '**/*.vsix'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+  
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts: vsix'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: vsix
