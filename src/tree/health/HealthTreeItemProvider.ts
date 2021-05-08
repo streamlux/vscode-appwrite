@@ -34,21 +34,35 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
 
         // get children for root
         if (element === undefined) {
-            const health = await promiseWithTimeout<AppwriteHealth | undefined>(10000, async () => await healthClient?.checkup(), 'Health request timed out');
-            if (health === undefined) {
-                return [];
+            try {
+                const health = await promiseWithTimeout<AppwriteHealth | undefined>(
+                    10000,
+                    async () => {
+                        try {
+                            return await healthClient?.checkup();
+                        } catch (e) {
+                            vscode.window.showErrorMessage('Could not connect to Appwrite project');
+                        }
+                    },
+                    "Health request timed out"
+                );
+                if (health === undefined) {
+                    return [];
+                }
+                ext.outputChannel?.append(JSON.stringify(health, null, 4));
+                const healthItems = Object.entries(health).map(([service, status]) => {
+                    return new HealthTreeItem(service, status, healthTooltips[service as keyof AppwriteHealth]);
+                });
+                this.lastChecked = new Date();
+                return [
+                    {
+                        label: `Updated at ${dayjs(this.lastChecked).format("LTS")}`,
+                    },
+                    ...healthItems,
+                ];
+            } catch (e) {
+                //
             }
-            ext.outputChannel?.append(JSON.stringify(health, null, 4));
-            const healthItems = Object.entries(health).map(([service, status]) => {
-                return new HealthTreeItem(service, status, healthTooltips[service as keyof AppwriteHealth]);
-            });
-            this.lastChecked = new Date();
-            return [
-                {
-                    label: `Updated at ${dayjs(this.lastChecked).format("LTS")}`,
-                },
-                ...healthItems,
-            ];
         }
         return [];
     }
