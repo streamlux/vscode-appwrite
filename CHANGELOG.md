@@ -5,6 +5,9 @@ All notable changes to the "vscode-appwrite" extension will be documented in thi
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
+
+
+## [0.0.7] - 2021-5-14
 ### Fixed
 - Fixed a bug where the password validation for creating a new user did not follow the Appwrite spec. [Issue](https://github.com/streamlux/vscode-appwrite/issues/11)
 - Show nicer message when Appwrite project can't be found. [Issue](https://github.com/streamlux/vscode-appwrite/pull/14)
