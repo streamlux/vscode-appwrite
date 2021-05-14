@@ -7,6 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [Unreleased]
 ### Fixed
 - Fixed a bug where the password validation for creating a new user did not follow the Appwrite spec. [Issue](https://github.com/streamlux/vscode-appwrite/issues/11)
+- Show nicer message when Appwrite project can't be found. [Issue](https://github.com/streamlux/vscode-appwrite/pull/14)
 
 ## [0.0.6] - 2021-4-30
 ### Fixed
