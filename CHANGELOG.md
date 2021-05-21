@@ -6,6 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.8] - 2021-5-21
+- Temp fix for Appwrite https://github.com/appwrite/appwrite/issues/1171
 
 ## [0.0.7] - 2021-5-14
 ### Fixed

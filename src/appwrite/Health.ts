@@ -11,7 +11,7 @@ export class Health {
     /**
      * @returns The health of all Appwrite services.
      */
-    public async checkup(): Promise<AppwriteHealth> {
+    public async checkup(): Promise<Partial<AppwriteHealth>> {
         return {
             HTTP: await this.health.get(),
             DB: await this.health.getDB(),
@@ -24,7 +24,7 @@ export class Health {
             QueueCertificates: await this.health.getQueueCertificates(),
             QueueFunctions: await this.health.getQueueFunctions(),
             StorageLocal: await this.health.getStorageLocal(),
-            AntiVirus: await this.health.getAntiVirus(),
+            // AntiVirus: await this.health.getAntiVirus(),
         };
     }
 }

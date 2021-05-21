@@ -35,12 +35,13 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
         // get children for root
         if (element === undefined) {
             try {
-                const health = await promiseWithTimeout<AppwriteHealth | undefined>(
+                const health = await promiseWithTimeout<Partial<AppwriteHealth> | undefined>(
                     10000,
                     async () => {
                         try {
                             return await healthClient?.checkup();
                         } catch (e) {
+                            ext.outputChannel?.append('Error: ' + e.message);
                             vscode.window.showErrorMessage('Could not connect to Appwrite project');
                         }
                     },
