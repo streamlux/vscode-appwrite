@@ -2,7 +2,7 @@
     "name": "vscode-appwrite",
     "displayName": "Appwrite",
     "description": "Manage your Appwrite resources right from VS Code!",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "engines": {
         "vscode": "^1.55.0"
     },
@@ -515,6 +515,6 @@
     "dependencies": {
         "dayjs": "^1.10.4",
         "fs-extra": "^9.1.0",
-        "node-appwrite": "^2.1.0"
+        "node-appwrite": "^2.2.1"
     }
 }

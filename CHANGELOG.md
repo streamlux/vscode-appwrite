@@ -6,6 +6,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.9] - 2021-5-21
+- Remove temporary fix for Appwrite https://github.com/appwrite/appwrite/issues/1171. Upstream issue was resolved.
+
 ## [0.0.8] - 2021-5-21
 - Temp fix for Appwrite https://github.com/appwrite/appwrite/issues/1171
 

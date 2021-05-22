@@ -24,7 +24,7 @@ export class Health {
             QueueCertificates: await this.health.getQueueCertificates(),
             QueueFunctions: await this.health.getQueueFunctions(),
             StorageLocal: await this.health.getStorageLocal(),
-            // AntiVirus: await this.health.getAntiVirus(),
+            AntiVirus: await this.health.getAntiVirus(),
         };
     }
 }
