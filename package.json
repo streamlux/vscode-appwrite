@@ -555,6 +555,11 @@
                     "command": "vscode-appwrite.openFunctionSettingsInBrowser",
                     "when": "viewItem =~ /^functionSettings$/",
                     "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.CreateTag",
+                    "when": "viewItem =~ /^tags$/",
+                    "group": "inline"
                 }
             ],
             "explorer/context": [

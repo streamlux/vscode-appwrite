@@ -1,10 +1,29 @@
-import { Uri } from "vscode";
+import { ProgressLocation, Uri, window } from "vscode";
 import { functionsClient, storageClient } from "../../client";
 import { getTarReadStream } from "../../utils/tar";
 import { ext } from "../../extensionVariables";
 import * as fs from "fs";
-export async function createTag(folder: Uri): Promise<void> {
-    const tarFilePath = await getTarReadStream(folder);
+import { TagsTreeItem } from "../../tree/functions/tags/TagsTreeItem";
+import { selectWorkspaceFolder } from "../../utils/workspace";
+export async function createTag(item: TagsTreeItem | Uri): Promise<void> {
+    if (item instanceof Uri) {
+        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (progress, token) => {
+            await createTagFromUri(item);
+        });
+        return;
+    }
+
+    if (item instanceof TagsTreeItem) {
+        const folder = await selectWorkspaceFolder("Select folder of your function code.");
+        console.log(folder);
+        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (progress, token) => {
+            await createTagFromUri(Uri.parse(folder));
+        });
+    }
+}
+
+async function createTagFromUri(uri: Uri): Promise<void> {
+    const tarFilePath = await getTarReadStream(uri);
     if (functionsClient === undefined) {
         return;
     }
