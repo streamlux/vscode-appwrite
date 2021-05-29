@@ -41,11 +41,11 @@ export class DatabaseTreeItemProvider implements vscode.TreeDataProvider<vscode.
 
         const collectionsList = await AppwriteCall<CollectionsList, CollectionsList>(databaseSdk.listCollections());
         if (collectionsList) {
-            const userTreeItems = collectionsList.collections.map((collection: Collection) => new CollectionTreeItem(collection, this)) ?? [];
+            const collectionTreeItems = collectionsList.collections.map((collection: Collection) => new CollectionTreeItem(collection, this)) ?? [];
             const headerItem: vscode.TreeItem = {
                 label: `Total collections: ${collectionsList.sum}`,
             };
-            return [headerItem, ...userTreeItems];
+            return [headerItem, ...collectionTreeItems];
         }
 
         return [{ label: "No collections found" }];

@@ -25,6 +25,22 @@ import { viewUserPrefs } from "./users/viewUserPrefs";
 import { editPermission } from "./database/permissions/editPermission";
 import { setActiveProject } from "./project/setActiveProject";
 import { removeProject } from "./project/removeProject";
+import { createTag } from './functions/createTag';
+import { createExecution } from './functions/createExecution';
+import { activateTag } from './functions/activateTag';
+import { editValue } from './common/editValue';
+import { deleteFunction } from './functions/deleteFunction';
+import { createFunction } from './functions/createFunction';
+import { createFunctionVar } from './functions/createFunctionVar';
+import { deleteFunctionVar } from './functions/deleteFunctionVar';
+import { deleteTag } from './functions/deleteTag';
+import { viewExecutionErrors } from './functions/viewExecutionErrors';
+import { viewExecutionOutput } from './functions/viewExecutionOutput';
+import { copyExecutionErrors } from './functions/copyExecutionErrors';
+import { copyExecutionOutput } from './functions/copyExecutionOutput';
+import { openExecutionsInBrowser } from './functions/openExecutionsInBrowser';
+import { openFunctionSettingsInBrowser } from './functions/openFunctionSettingsInBrowser';
+import { openFunctionTagsInBrowser } from './functions/openFunctionTagsInBrowser';
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -55,6 +71,9 @@ export function registerCommands(context: ExtensionContext): void {
             }
         });
     };
+
+    /** Common **/
+    registerCommand("editValue", editValue);
 
     /** General **/
     registerCommand("Connect", connectAppwrite, "all");
@@ -98,4 +117,23 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("setActiveProject", setActiveProject, "all");
     registerCommand("refreshProjects", undefined, "projects");
     registerCommand("removeProject", removeProject, "all");
+
+    /** Functions **/
+    registerCommand("refreshFunctions", undefined, "functions");
+    registerCommand("CreateExecution", createExecution, "functions");
+    registerCommand("CreateTag", createTag, "functions");
+    registerCommand("activateTag", activateTag, "functions");
+    registerCommand("deleteTag", deleteTag, "functions");
+    registerCommand("deleteFunction", deleteFunction, "functions");
+    registerCommand("openFunctionsDocumentation", () => openDocumentation("functions"));
+    registerCommand("createFunction", createFunction, "functions");
+    registerCommand("createFunctionVar", createFunctionVar, "functions");
+    registerCommand("deleteFunctionVar", deleteFunctionVar, "functions");
+    registerCommand("viewExecutionErrors", viewExecutionErrors);
+    registerCommand("viewExecutionOutput", viewExecutionOutput);
+    registerCommand("copyExecutionOutput", copyExecutionOutput);
+    registerCommand("copyExecutionErrors", copyExecutionErrors);
+    registerCommand("openExecutionsInBrowser", openExecutionsInBrowser);
+    registerCommand("openFunctionTagsInBrowser", openFunctionTagsInBrowser);
+    registerCommand("openFunctionSettingsInBrowser", openFunctionSettingsInBrowser);
 }

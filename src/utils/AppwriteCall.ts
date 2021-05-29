@@ -10,7 +10,7 @@ export default function AppwriteCall<T, R = T>(
 ): Promise<R | undefined> {
     return promise.then(
         (successResp) => {
-            ext.outputChannel?.appendLog("Appwrite call success");
+            ext.outputChannel?.appendLog(`Appwrite call success:`);
             if (onSuccess) {
                 return onSuccess((successResp as unknown) as T);
             }

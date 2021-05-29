@@ -2,7 +2,7 @@
     "name": "vscode-appwrite",
     "displayName": "Appwrite",
     "description": "Manage your Appwrite resources right from VS Code!",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "engines": {
         "vscode": "^1.55.0"
     },
@@ -30,7 +30,9 @@
         "onView:Users",
         "onView:Database",
         "onView:Health",
-        "onCommand:vscode-appwrite.AddProject"
+        "onView:Functions",
+        "onCommand:vscode-appwrite.AddProject",
+        "onCommand:vscode-appwrite.CreateTag"
     ],
     "main": "./dist/extension.js",
     "contributes": {
@@ -185,9 +187,98 @@
                 "icon": "$(refresh)"
             },
             {
+                "command": "vscode-appwrite.refreshFunctions",
+                "title": "Refresh functions",
+                "icon": "$(refresh)"
+            },
+            {
                 "command": "vscode-appwrite.removeProject",
                 "title": "Remove project",
                 "icon": "$(trash)"
+            },
+            {
+                "command": "vscode-appwrite.CreateTag",
+                "title": "Create function tag",
+                "icon": "$(cloud-upload)"
+            },
+            {
+                "command": "vscode-appwrite.deleteTag",
+                "title": "Delete tag",
+                "icon": "$(trash)"
+            },
+            {
+                "command": "vscode-appwrite.CreateExecution",
+                "title": "Execute"
+            },
+            {
+                "command": "vscode-appwrite.activateTag",
+                "title": "Activate"
+            },
+            {
+                "command": "vscode-appwrite.editValue",
+                "title": "Edit",
+                "icon": "$(edit)"
+            },
+            {
+                "command": "vscode-appwrite.deleteFunction",
+                "title": "Delete",
+                "icon": "$(trash)"
+            },
+            {
+                "command": "vscode-appwrite.openFunctionsDocumentation",
+                "title": "Open functions documentation",
+                "icon": "$(book)"
+            },
+            {
+                "command": "vscode-appwrite.createFunction",
+                "title": "Create function",
+                "icon": "$(add)"
+            },
+            {
+                "command": "vscode-appwrite.createFunctionVar",
+                "title": "Create variable",
+                "icon": "$(add)"
+            },
+            {
+                "command": "vscode-appwrite.deleteFunctionVar",
+                "title": "Delete variable",
+                "icon": "$(trash)"
+            },
+            {
+                "command": "vscode-appwrite.viewExecutionOutput",
+                "title": "View execution stdout",
+                "enablement": "viewItem =~ /^((execution|execution_outputOnly))$/"
+            },
+            {
+                "command": "vscode-appwrite.viewExecutionErrors",
+                "title": "View execution stderr",
+                "enablement": "viewItem =~ /^((execution|execution_errorOnly))$/"
+            },
+            {
+                "command": "vscode-appwrite.copyExecutionOutput",
+                "title": "Copy execution stdout",
+                "enablement": "viewItem =~ /^((execution|execution_outputOnly))$/"
+            },
+            {
+                "command": "vscode-appwrite.copyExecutionErrors",
+                "title": "Copy execution stderr",
+                "enablement": "viewItem =~ /^((execution|execution_errorOnly))$/"
+            },
+            {
+                "command": "vscode-appwrite.openExecutionsInBrowser",
+                "title": "View executions in browser",
+                "enablement": "viewItem =~ /^(executions)$/",
+                "icon": "$(link-external)"
+            },
+            {
+                "command": "vscode-appwrite.openFunctionTagsInBrowser",
+                "title": "Open function tags in browser",
+                "icon": "$(link-external)"
+            },
+            {
+                "command": "vscode-appwrite.openFunctionSettingsInBrowser",
+                "title": "Open function settings in browser",
+                "icon": "$(link-external)"
             }
         ],
         "views": {
@@ -211,6 +302,10 @@
                 {
                     "id": "Projects",
                     "name": "Projects"
+                },
+                {
+                    "id": "Functions",
+                    "name": "Functions (Preview)"
                 }
             ]
         },
@@ -277,13 +372,23 @@
                     "group": "navigation"
                 },
                 {
+                    "command": "vscode-appwrite.openFunctionsDocumentation",
+                    "when": "view == Functions",
+                    "group": "navigation"
+                },
+                {
                     "command": "vscode-appwrite.refreshProjects",
                     "when": "view == Projects",
                     "group": "navigation"
                 },
                 {
-                    "command": "vscode-appwrite.addProject",
-                    "when": "view == Projects",
+                    "command": "vscode-appwrite.refreshFunctions",
+                    "when": "view == Functions",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.createFunction",
+                    "when": "view == Functions",
                     "group": "navigation"
                 }
             ],
@@ -383,6 +488,85 @@
                 {
                     "command": "vscode-appwrite.removeProject",
                     "when": "viewItem =~ /(appwriteProject)/"
+                },
+                {
+                    "command": "vscode-appwrite.CreateExecution",
+                    "when": "viewItem =~ /^(function)$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.activateTag",
+                    "when": "viewItem =~ /^(tag)$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.editValue",
+                    "when": "viewItem =~ /^(editable)/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.deleteFunction",
+                    "when": "viewItem =~ /^(function)$/"
+                },
+                {
+                    "command": "vscode-appwrite.deleteFunctionVar",
+                    "when": "viewItem =~ /(var)$/"
+                },
+                {
+                    "command": "vscode-appwrite.createFunctionVar",
+                    "when": "viewItem =~ /^(vars)$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.deleteTag",
+                    "when": "viewItem =~ /^(tag)$/"
+                },
+                {
+                    "command": "vscode-appwrite.viewExecutionErrors",
+                    "when": "viewItem =~ /^execution[^s]*$/",
+                    "group": "view@1"
+                },
+                {
+                    "command": "vscode-appwrite.viewExecutionOutput",
+                    "when": "viewItem =~ /^execution[^s]*$/",
+                    "group": "view@1"
+                },
+                {
+                    "command": "vscode-appwrite.copyExecutionErrors",
+                    "when": "viewItem =~ /^execution[^s]*$/",
+                    "group": "copy@2"
+                },
+                {
+                    "command": "vscode-appwrite.copyExecutionOutput",
+                    "when": "viewItem =~ /^execution[^s]*$/",
+                    "group": "copy@2"
+                },
+                {
+                    "command": "vscode-appwrite.openExecutionsInBrowser",
+                    "when": "viewItem =~ /^executions$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.openFunctionTagsInBrowser",
+                    "when": "viewItem =~ /^tags$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.openFunctionSettingsInBrowser",
+                    "when": "viewItem =~ /^functionSettings$/",
+                    "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.CreateTag",
+                    "when": "viewItem =~ /^tags$/",
+                    "group": "inline"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "vscode-appwrite.CreateTag",
+                    "when": "explorerResourceIsFolder == true",
+                    "group": "appwrite@1"
                 }
             ],
             "commandPalette": [
@@ -499,6 +683,7 @@
         "@types/glob": "^7.1.3",
         "@types/mocha": "^8.0.4",
         "@types/node": "^12.11.7",
+        "@types/tar": "^4.0.4",
         "@types/vscode": "^1.55.0",
         "@typescript-eslint/eslint-plugin": "^4.14.1",
         "@typescript-eslint/parser": "^4.14.1",
@@ -513,8 +698,11 @@
         "webpack-cli": "^4.4.0"
     },
     "dependencies": {
+        "cron-validate": "^1.4.3",
+        "cronstrue": "^1.113.0",
         "dayjs": "^1.10.4",
         "fs-extra": "^9.1.0",
-        "node-appwrite": "^2.2.1"
+        "node-appwrite": "^2.2.3",
+        "tar": "^6.1.0"
     }
 }

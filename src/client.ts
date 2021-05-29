@@ -1,5 +1,6 @@
 import { Client } from "./appwrite";
 import { Database } from "./appwrite/Database";
+import { Functions } from './appwrite/Functions';
 import { Health } from "./appwrite/Health";
 import { Storage } from "./appwrite/Storage";
 import { Users } from "./appwrite/Users";
@@ -12,6 +13,8 @@ export let usersClient: Users | undefined;
 export let healthClient: Health | undefined;
 export let databaseClient: Database | undefined;
 export let storageClient: Storage | undefined;
+export let functionsClient: Functions | undefined;
+
 
 function initAppwriteClient({ endpoint, projectId, secret, selfSigned }: AppwriteProjectConfiguration) {
     client = new AppwriteSDK.Client();
@@ -22,6 +25,7 @@ function initAppwriteClient({ endpoint, projectId, secret, selfSigned }: Appwrit
     healthClient = new Health(client);
     databaseClient = new Database(client);
     storageClient = new Storage(client);
+    functionsClient = new Functions(client);
 
     return client;
 }
@@ -36,4 +40,5 @@ export function createAppwriteClient(config?: AppwriteProjectConfiguration): voi
     healthClient = undefined;
     databaseClient = undefined;
     storageClient = undefined;
+    functionsClient = undefined;
 }

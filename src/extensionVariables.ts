@@ -1,5 +1,6 @@
 import { ExtensionContext } from "vscode";
 import { DatabaseTreeItemProvider } from './tree/database/DatabaseTreeItemProvider';
+import { FunctionsTreeItemProvider } from './tree/functions/FunctionsTreeItemProvider';
 import { HealthTreeItemProvider } from './tree/health/HealthTreeItemProvider';
 import { ProjectsTreeItemProvider } from './tree/projects/ProjectsTreeItemProvider';
 import { StorageTreeItemProvider } from './tree/storage/StorageTreeItemProvider';
@@ -12,12 +13,13 @@ export type AppwriteTree = {
     database?: DatabaseTreeItemProvider;
     storage?: StorageTreeItemProvider;
     projects?: ProjectsTreeItemProvider;
+    functions?: FunctionsTreeItemProvider;
 };
 
 export type Ext = {
     context?: ExtensionContext;
-    outputChannel?: AppwriteOutputChannel;
+    outputChannel: AppwriteOutputChannel;
     tree?: AppwriteTree;
 };
 
-export const ext: Ext = {};
+export const ext: Ext = {} as Ext;
