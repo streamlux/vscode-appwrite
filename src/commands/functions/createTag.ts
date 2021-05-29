@@ -7,7 +7,7 @@ import { TagsTreeItem } from "../../tree/functions/tags/TagsTreeItem";
 import { selectWorkspaceFolder } from "../../utils/workspace";
 export async function createTag(item: TagsTreeItem | Uri): Promise<void> {
     if (item instanceof Uri) {
-        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (progress, token) => {
+        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (_progress, _token) => {
             await createTagFromUri(item);
         });
         return;
@@ -16,7 +16,7 @@ export async function createTag(item: TagsTreeItem | Uri): Promise<void> {
     if (item instanceof TagsTreeItem) {
         const folder = await selectWorkspaceFolder("Select folder of your function code.");
         console.log(folder);
-        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (progress, token) => {
+        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (_progress, _token) => {
             await createTagFromUri(Uri.parse(folder));
         });
     }
