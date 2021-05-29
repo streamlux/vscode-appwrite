@@ -1,9 +1,9 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
-import { Execution, ExecutionList } from '../../appwrite';
-import { functionsClient } from "../../client";
-import { AppwriteTreeItemBase } from '../../ui/AppwriteTreeItemBase';
+import { Execution, ExecutionList } from '../../../appwrite';
+import { functionsClient } from "../../../client";
+import { AppwriteTreeItemBase } from '../../../ui/AppwriteTreeItemBase';
 import { ExecutionTreeItem } from './ExecutionTreeItem';
-import { FunctionTreeItem } from './FunctionTreeItem';
+import { FunctionTreeItem } from '../FunctionTreeItem';
 
 export class ExecutionsTreeItem extends AppwriteTreeItemBase<FunctionTreeItem> {
     constructor(public readonly parent: FunctionTreeItem) {

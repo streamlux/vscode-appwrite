@@ -19,7 +19,7 @@ export class Functions {
     public async get(functionId: string): Promise<any> {
         return await AppwriteCall(this.functions.get(functionId));
     }
-    public async update(functionId: string, name: string, execute: string, vars: Vars, events: string[], schedule?: string, timeout?: number): Promise<any> {
+    public async update(functionId: string, name: string, execute: string[], vars?: Vars, events?: string[], schedule?: string, timeout?: number): Promise<any> {
         return await AppwriteCall(this.functions.update(functionId, name, execute, vars, events, schedule, timeout));
     }
     public async updateTag(functionId: string, tagId: string): Promise<any> {

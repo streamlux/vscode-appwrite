@@ -3,7 +3,7 @@ import { commands, Uri } from "vscode";
 import { clientConfig } from "../../client";
 import { UserTreeItem } from "../../tree/users/UserTreeItem";
 
-function getConsoleUrlFromEndpoint(endpoint: string): string {
+export function getConsoleUrlFromEndpoint(endpoint: string): string {
     const url = new URL(endpoint);
     return `${url.origin}/console`;
 }

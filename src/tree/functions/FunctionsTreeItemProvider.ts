@@ -37,10 +37,7 @@ export class FunctionsTreeItemProvider implements vscode.TreeDataProvider<vscode
 
             if (list) {
                 const functionTreeItems = list.functions.map((func: Function) => new FunctionTreeItem(func, this)) ?? [];
-                const headerItem: vscode.TreeItem = {
-                    label: `Total functions: ${list.sum}`,
-                };
-                return [headerItem, ...functionTreeItems];
+                return functionTreeItems;
             }
 
             return [{ label: "No functions found" }];

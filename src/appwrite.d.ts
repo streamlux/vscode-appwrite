@@ -359,7 +359,7 @@ export type AppwriteHealth = {
 };
 
 export type StorageClient = {
-    createFile: (file: any, read: string[], write: string[]) => Promise<any>;
+    createFile: (file: any, read?: string[], write?: string[]) => Promise<any>;
     listFiles: () => Promise<any>;
     getFile: (fileId: string) => Promise<any>;
 };
@@ -431,7 +431,7 @@ export type FunctionsClient = {
     create: (name: string, execute: string[], env: string, vars?: Vars, events?: string[], schedule?: string, timeout?: number) => Promise<any>;
     list: (search?: string, offset?: number, limit?: number, orderType?: 'ASC' | 'DESC') => Promise<any>;
     get: (functionId: string) => Promise<any>;
-    update: (functionId: string, name: string, execute: string, vars: Vars, events: string[], schedule?: string, timeout?: number) => Promise<any>;
+    update: (functionId: string, name: string, execute: string[], vars?: Vars, events?: string[], schedule?: string, timeout?: number) => Promise<any>;
     updateTag: (functionId: string, tagId: string) => Promise<any>;
     delete: (functionId: string) => Promise<any>;
     createTag: (id: string, command: string, code: ReadStream) => Promise<any>;
@@ -442,9 +442,6 @@ export type FunctionsClient = {
     listExecutions: (functionId: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC') => Promise<any>;
     getExecution: (functionId: string, executionId: string) => Promise<any>;
 }
-
-
-
 
 export type SDK = {
     Client: new () => Client;

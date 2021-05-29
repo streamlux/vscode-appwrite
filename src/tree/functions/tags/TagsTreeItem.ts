@@ -1,7 +1,7 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
-import { functionsClient } from "../../client";
-import { AppwriteTreeItemBase } from '../../ui/AppwriteTreeItemBase';
-import { FunctionTreeItem } from './FunctionTreeItem';
+import { functionsClient } from "../../../client";
+import { AppwriteTreeItemBase } from '../../../ui/AppwriteTreeItemBase';
+import { FunctionTreeItem } from '../FunctionTreeItem';
 import { TagTreeItem } from './TagTreeItem';
 
 export class TagsTreeItem extends AppwriteTreeItemBase<FunctionTreeItem> {

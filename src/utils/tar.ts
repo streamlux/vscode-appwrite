@@ -4,14 +4,13 @@ import { ext } from "../extensionVariables";
 import * as path from "path";
 import * as os from "os";
 import * as fs from "fs";
-import { ReadStream } from 'node:fs';
 
-export async function getTarReadStream(folder: Uri): Promise<ReadStream | undefined> {
+export async function getTarReadStream(folder: Uri): Promise<string | undefined> {
     try {
         const folderName = path.basename(folder.path);
 
         const tarName = `${folderName}.tar.gz`;
-        const cwd = folder.fsPath;
+        const cwd = path.resolve(folder.fsPath, '..');
         if (cwd === undefined) {
             window.showErrorMessage("No workspace open.");
             return;
@@ -20,17 +19,11 @@ export async function getTarReadStream(folder: Uri): Promise<ReadStream | undefi
 
         const tarFilePath = path.join(os.tmpdir(), tarName);
 
-        tar.create({ gzip: true, cwd: cwd }, [path.relative(cwd, folder.fsPath)]).pipe(fs.createWriteStream(tarFilePath, { emitClose: true}));
+        tar.create({ gzip: true, cwd: cwd }, [path.relative(cwd, folder.fsPath)]).pipe(fs.createWriteStream(tarFilePath));
 
-        const stream = fs.createReadStream(tarFilePath);
-        stream.on('close', () => {
-            try {
-                fs.unlinkSync(tarFilePath);
-            } catch (e) {
-                //
-            }
-        });
-        return stream;
+        ext.outputChannel.appendLog(`Created ${tarFilePath}`);
+
+        return tarFilePath;
 
     } catch (e) {
         ext.outputChannel?.appendLog("Error creating tar.gz: " + e);

@@ -1,17 +1,21 @@
-import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
+import { MarkdownString, ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Function } from "../../appwrite";
 import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
-import { ExecutionsTreeItem } from './ExecutionsTreeItem';
+import { msToDate } from '../../utils/date';
+import { ExecutionsTreeItem } from './executions/ExecutionsTreeItem';
 import { FunctionsTreeItemProvider } from './FunctionsTreeItemProvider';
-import { TagsTreeItem } from './TagsTreeItem';
+import { FunctionSettingsTreeItem } from './settings/FunctionSettingsTreeItem';
+import { TagsTreeItem } from './tags/TagsTreeItem';
 
 export class FunctionTreeItem extends AppwriteTreeItemBase {
     constructor(public func: Function, public readonly provider: FunctionsTreeItemProvider) {
         super(undefined, func.name);
+        this.tooltip = new MarkdownString(`ID: ${func.$id}  \nLast updated: ${msToDate(func.dateUpdated)}  \nCreated: ${msToDate(func.dateCreated)}`);
+        this.description = func.env;
     }
 
     public async getChildren(): Promise<TreeItem[]> {
-        return [new TagsTreeItem(this), new ExecutionsTreeItem(this)];
+        return [new FunctionSettingsTreeItem(this), new TagsTreeItem(this), new ExecutionsTreeItem(this)];
     }
 
     public async refresh(): Promise<void> {
