@@ -1,3 +1,6 @@
+import { ReadStream } from 'fs';
+import { Stream } from 'node:stream';
+
 export type Token = {
     /**
      * Token ID.
@@ -287,7 +290,7 @@ export type Rule = {
     list: string[];
 };
 
-interface Permissions {
+export type Permissions = {
     read: string[];
     write: string[];
 }
@@ -361,6 +364,88 @@ export type StorageClient = {
     getFile: (fileId: string) => Promise<any>;
 };
 
+type Vars = Record<string, any>;
+
+export type Function = {
+  '$id': string;
+  '$permissions': Permissions;
+  name: string;
+  dateCreated: number;
+  dateUpdated: number;
+  status: string;
+  env: string;
+  tag: string;
+  vars: Vars;
+  events: string[];
+  schedule: string;
+  scheduleNext: number;
+  schedulePrevious: number;
+  timeout: number;
+}
+
+export type FunctionsList = {
+    sum: number;
+    functions: Function[];
+}
+
+export type Tag = {
+  '$id': string;
+  functionId: string;
+  dateCreated: number;
+  command: string;
+  size: string;
+};
+
+export type TagList = {
+    sum: number;
+    tags: Tag[];
+}
+
+export type ExecutionStatus = "waiting" | "processing" | "completed" | "failed";
+
+export type Execution = {
+  '$id': string;
+  functionId: string;
+  dateCreated: number;
+  trigger: string;
+  status: ExecutionStatus;
+  exitCode: number;
+  stdout: string;
+  stderr: string;
+  time: number;
+};
+
+export type ExecutionList = {
+    sum: number;
+    executions: Execution[];
+};
+
+export type Search = {
+    search?: string;
+    limit?: number;
+    offset?: number;
+    orderType?: 'ASC' | 'DESC';
+};
+
+export type FunctionsClient = {
+    create: (name: string, execute: string[], env: string, vars?: Vars, events?: string[], schedule?: string, timeout?: number) => Promise<any>;
+    list: (search?: string, offset?: number, limit?: number, orderType?: 'ASC' | 'DESC') => Promise<any>;
+    get: (functionId: string) => Promise<any>;
+    update: (functionId: string, name: string, execute: string, vars: Vars, events: string[], schedule?: string, timeout?: number) => Promise<any>;
+    updateTag: (functionId: string, tagId: string) => Promise<any>;
+    delete: (functionId: string) => Promise<any>;
+    createTag: (id: string, command: string, code: ReadStream) => Promise<any>;
+    listTags: (id: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC') => Promise<any>;
+    getTag: (functionId: string, tagId: string) => Promise<any>;
+    deleteTag: (functionId: string, tagId: string) => Promise<any>;
+    createExecution: (functionId: string, data?: string) => Promise<any>;
+    listExecutions: (functionId: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC') => Promise<any>;
+    getExecution: (functionId: string, executionId: string) => Promise<any>;
+}
+
+
+
+
 export type SDK = {
     Client: new () => Client;
 
@@ -368,4 +453,5 @@ export type SDK = {
     Health: new (client: Client) => HealthClient;
     Database: new (client: Client) => DatabaseClient;
     Storage: new (client: Client) => StorageClient;
+    Functions: new (client: Client) => FunctionsClient;
 };

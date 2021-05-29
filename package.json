@@ -30,7 +30,9 @@
         "onView:Users",
         "onView:Database",
         "onView:Health",
-        "onCommand:vscode-appwrite.AddProject"
+        "onView:Functions",
+        "onCommand:vscode-appwrite.AddProject",
+        "onCommand:vscode-appwrite.CreateTag"
     ],
     "main": "./dist/extension.js",
     "contributes": {
@@ -188,6 +190,16 @@
                 "command": "vscode-appwrite.removeProject",
                 "title": "Remove project",
                 "icon": "$(trash)"
+            },
+            {
+                "command": "vscode-appwrite.CreateTag",
+                "title": "Create function tag",
+                "icon": "$(cloud-upload)"
+            },
+            {
+                "command": "vscode-appwrite.CreateExecution",
+                "title": "Execute function",
+                "icon": "$(play)"
             }
         ],
         "views": {
@@ -211,6 +223,10 @@
                 {
                     "id": "Projects",
                     "name": "Projects"
+                },
+                {
+                    "id": "Functions",
+                    "name": "Functions"
                 }
             ]
         },
@@ -383,6 +399,18 @@
                 {
                     "command": "vscode-appwrite.removeProject",
                     "when": "viewItem =~ /(appwriteProject)/"
+                },
+                {
+                    "command": "vscode-appwrite.CreateExecution",
+                    "when": "viewItem =~ /(function)/",
+                    "group": "inline"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "vscode-appwrite.CreateTag",
+                    "when": "explorerResourceIsFolder == true",
+                    "group": "appwrite@1"
                 }
             ],
             "commandPalette": [
@@ -499,6 +527,7 @@
         "@types/glob": "^7.1.3",
         "@types/mocha": "^8.0.4",
         "@types/node": "^12.11.7",
+        "@types/tar": "^4.0.4",
         "@types/vscode": "^1.55.0",
         "@typescript-eslint/eslint-plugin": "^4.14.1",
         "@typescript-eslint/parser": "^4.14.1",
@@ -515,6 +544,7 @@
     "dependencies": {
         "dayjs": "^1.10.4",
         "fs-extra": "^9.1.0",
-        "node-appwrite": "^2.2.1"
+        "node-appwrite": "^2.2.1",
+        "tar": "^6.1.0"
     }
 }

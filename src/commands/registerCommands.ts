@@ -25,6 +25,8 @@ import { viewUserPrefs } from "./users/viewUserPrefs";
 import { editPermission } from "./database/permissions/editPermission";
 import { setActiveProject } from "./project/setActiveProject";
 import { removeProject } from "./project/removeProject";
+import { createTag } from './functions/createTag';
+import { createExecution } from './functions/createExecution';
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -98,4 +100,8 @@ export function registerCommands(context: ExtensionContext): void {
     registerCommand("setActiveProject", setActiveProject, "all");
     registerCommand("refreshProjects", undefined, "projects");
     registerCommand("removeProject", removeProject, "all");
+
+    /** Functions **/
+    registerCommand("CreateTag", createTag, "functions");
+    registerCommand("CreateExecution", createExecution, "functions");
 }
