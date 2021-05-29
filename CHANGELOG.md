@@ -6,6 +6,16 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.1.0] - 2021-5-29
+
+## Functions!
+### Added
+- Ability to create and delete Appwrite functions
+- Edit function settings
+- View, and delete tags (creating tags is broken currently)
+- Create and view function executions
+- View execution output and errors
+
 ## [0.0.9] - 2021-5-21
 - Remove temporary fix for Appwrite https://github.com/appwrite/appwrite/issues/1171. Upstream issue was resolved.
 
