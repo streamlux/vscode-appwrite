@@ -1,11 +1,16 @@
+import { Execution } from '../../appwrite';
 import { ExecutionTreeItem } from "../../tree/functions/executions/ExecutionTreeItem";
 import { openReadOnlyContent } from "../../ui/openReadonlyContent";
 
-export async function viewExecutionErrors(executionItem: ExecutionTreeItem): Promise<void> {
+export async function viewExecutionErrors(executionItem: ExecutionTreeItem | Execution): Promise<void> {
     if (executionItem === undefined) {
         return;
     }
 
-    const execution = executionItem.execution;
-    await openReadOnlyContent({ label: `${executionItem.parent.parent.func.name} execution stderr`, fullId: `${execution.$id}-errors.txt` }, execution.stderr, '.txt');
+    let execution = executionItem as Execution;
+
+    if (executionItem instanceof ExecutionTreeItem) {
+        execution = executionItem.execution;
+    }
+    await openReadOnlyContent({ label: `Execution stderr`, fullId: `${execution.$id}-errors.txt` }, execution.stderr, '.txt');
 }

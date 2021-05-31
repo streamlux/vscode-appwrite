@@ -1,6 +1,6 @@
 import { TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Vars } from "../../../appwrite";
-import { AppwriteTreeItemBase } from "../../../ui/AppwriteTreeItemBase";
+import { AppwriteTreeItemBase } from '../../../ui/AppwriteTreeItemBase';
 import { FunctionSettingsTreeItem } from "./FunctionSettingsTreeItem";
 import { VarTreeItem } from "./VarTreeItem";
 

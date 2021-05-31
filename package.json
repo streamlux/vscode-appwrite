@@ -40,151 +40,187 @@
             {
                 "command": "vscode-appwrite.Connect",
                 "title": "Connect to Appwrite",
-                "category": ""
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.CreateUser",
                 "title": "Create user",
-                "icon": "$(add)"
+                "icon": "$(add)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.DeleteUser",
                 "title": "Delete user",
-                "icon": "$(trash)"
+                "icon": "$(trash)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.GetUserLogs",
                 "title": "Get user logs",
-                "icon": "$(output)"
+                "icon": "$(output)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.openUserInConsole",
                 "title": "View user in Appwrite console",
-                "icon": "$(link-external)"
+                "icon": "$(link-external)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.viewUserPrefs",
                 "title": "View user preferences",
-                "icon": "$(json)"
+                "icon": "$(json)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshEntry",
                 "title": "Refresh",
-                "icon": "$(refresh)"
+                "icon": "$(refresh)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.copyUserId",
                 "title": "Copy user ID",
-                "icon": "$(clippy)"
+                "icon": "$(clippy)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.copyUserEmail",
                 "title": "Copy user email",
-                "icon": "$(clippy)"
+                "icon": "$(clippy)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshUsersList",
                 "title": "Refresh users list",
-                "icon": "$(refresh)"
+                "icon": "$(refresh)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.OpenUsersDocumentation",
                 "title": "Open documentation",
-                "icon": "$(book)"
+                "icon": "$(book)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.OpenDatabaseDocumentation",
                 "title": "Open documentation",
-                "icon": "$(book)"
+                "icon": "$(book)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.viewDocumentAsJson",
-                "title": "View as JSON"
+                "title": "View as JSON",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.viewCollectionAsJson",
-                "title": "View collection as JSON"
+                "title": "View collection as JSON",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshCollection",
                 "title": "Refresh",
-                "icon": "$(refresh)"
+                "icon": "$(refresh)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.createRule",
                 "title": "Create collection rule",
-                "icon": "$(add)"
+                "icon": "$(add)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.removeRule",
-                "title": "Remove collection rule"
+                "title": "Remove collection rule",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.deleteDocument",
-                "title": "Delete document"
+                "title": "Delete document",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.deleteCollection",
-                "title": "Delete collection"
+                "title": "Delete collection",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshCollectionsList",
                 "title": "Refresh",
-                "icon": "$(refresh)"
+                "icon": "$(refresh)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.createCollection",
                 "title": "Create collection",
-                "icon": "$(add)"
+                "icon": "$(add)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.createPermission",
                 "title": "Create permission",
-                "icon": "$(add)"
+                "icon": "$(add)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.deletePermission",
                 "title": "Delete permission",
-                "icon": "$(trash)"
+                "icon": "$(trash)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.editPermission",
                 "title": "Edit permission",
-                "icon": "$(edit)"
+                "icon": "$(edit)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshHealth",
                 "title": "Refresh health",
-                "icon": "$(refresh)"
+                "icon": "$(refresh)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.openHealthDocumentation",
                 "title": "Open health documentation",
-                "icon": "$(book)"
+                "icon": "$(book)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshStorage",
                 "title": "Refresh storage",
-                "icon": "$(refresh)"
+                "icon": "$(refresh)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.openStorageDocumentation",
                 "title": "Open storage documentation",
-                "icon": "$(book)"
+                "icon": "$(book)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.addProject",
                 "title": "Add Appwrite project",
-                "icon": "$(plus)"
+                "icon": "$(plus)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.setActiveProject",
-                "title": "Set as active"
+                "title": "Set as active",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshProjects",
                 "title": "Refresh projects",
-                "icon": "$(refresh)"
+                "icon": "$(refresh)",
+                "category": "Appwrite"
+            },
+            {
+                "command": "vscode-appwrite.refreshFunctions",
+                "title": "Refresh functions",
+                "icon": "$(refresh)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.refreshFunctions",
@@ -194,91 +230,115 @@
             {
                 "command": "vscode-appwrite.removeProject",
                 "title": "Remove project",
-                "icon": "$(trash)"
+                "icon": "$(trash)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.CreateTag",
                 "title": "Create function tag",
-                "icon": "$(cloud-upload)"
+                "icon": "$(cloud-upload)",
+                "shortTitle": "Create function tag",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.deleteTag",
                 "title": "Delete tag",
-                "icon": "$(trash)"
+                "icon": "$(trash)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.CreateExecution",
-                "title": "Execute"
+                "title": "Execute",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.activateTag",
-                "title": "Activate"
+                "title": "Activate",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.editValue",
                 "title": "Edit",
-                "icon": "$(edit)"
+                "icon": "$(edit)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.deleteFunction",
                 "title": "Delete",
-                "icon": "$(trash)"
+                "icon": "$(trash)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.openFunctionsDocumentation",
                 "title": "Open functions documentation",
-                "icon": "$(book)"
+                "icon": "$(book)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.createFunction",
                 "title": "Create function",
-                "icon": "$(add)"
+                "icon": "$(add)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.createFunctionVar",
                 "title": "Create variable",
-                "icon": "$(add)"
+                "icon": "$(add)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.deleteFunctionVar",
                 "title": "Delete variable",
-                "icon": "$(trash)"
+                "icon": "$(trash)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.viewExecutionOutput",
                 "title": "View execution stdout",
-                "enablement": "viewItem =~ /^((execution|execution_outputOnly))$/"
+                "enablement": "viewItem =~ /^((execution|execution_outputOnly))$/",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.viewExecutionErrors",
                 "title": "View execution stderr",
-                "enablement": "viewItem =~ /^((execution|execution_errorOnly))$/"
+                "enablement": "viewItem =~ /^((execution|execution_errorOnly))$/",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.copyExecutionOutput",
                 "title": "Copy execution stdout",
-                "enablement": "viewItem =~ /^((execution|execution_outputOnly))$/"
+                "enablement": "viewItem =~ /^((execution|execution_outputOnly))$/",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.copyExecutionErrors",
                 "title": "Copy execution stderr",
-                "enablement": "viewItem =~ /^((execution|execution_errorOnly))$/"
+                "enablement": "viewItem =~ /^((execution|execution_errorOnly))$/",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.openExecutionsInBrowser",
                 "title": "View executions in browser",
                 "enablement": "viewItem =~ /^(executions)$/",
-                "icon": "$(link-external)"
+                "icon": "$(link-external)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.openFunctionTagsInBrowser",
                 "title": "Open function tags in browser",
-                "icon": "$(link-external)"
+                "icon": "$(link-external)",
+                "category": "Appwrite"
             },
             {
                 "command": "vscode-appwrite.openFunctionSettingsInBrowser",
                 "title": "Open function settings in browser",
-                "icon": "$(link-external)"
+                "icon": "$(link-external)",
+                "category": "Appwrite"
+            },
+            {
+                "command": "vscode-appwrite.viewMore",
+                "title": "View more",
+                "category": "Appwrite"
             }
         ],
         "views": {
@@ -570,6 +630,9 @@
                 }
             ],
             "commandPalette": [
+                {
+                    "command": "vscode-appwrite.CreateTag"
+                },
                 {
                     "command": "vscode-appwrite.Connect"
                 },

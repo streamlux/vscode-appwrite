@@ -4,8 +4,8 @@ import AppwriteCall from "../../utils/AppwriteCall";
 import { Collection, CollectionsList } from "../../appwrite";
 import { CollectionTreeItem } from "./CollectionTreeItem";
 import { AppwriteSDK } from "../../constants";
-import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
 import { ext } from '../../extensionVariables';
+import { AppwriteTreeItemBase } from '../../ui/AppwriteTreeItemBase';
 
 export class DatabaseTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | void> = new vscode.EventEmitter<
@@ -34,7 +34,7 @@ export class DatabaseTreeItemProvider implements vscode.TreeDataProvider<vscode.
         }
 
         if (parent instanceof AppwriteTreeItemBase) {
-            return parent.getChildren?.() ?? [];
+            return await parent.getChildren?.() ?? [];
         }
 
         const databaseSdk = new AppwriteSDK.Database(client);

@@ -44,7 +44,7 @@ export class FunctionsTreeItemProvider implements vscode.TreeDataProvider<vscode
         }
 
         if (parent instanceof AppwriteTreeItemBase) {
-            return parent.getChildren?.() ?? [];
+            return await parent.getChildren?.() ?? [];
         }
 
         return [];

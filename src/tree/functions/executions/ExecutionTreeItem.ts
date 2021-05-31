@@ -1,7 +1,5 @@
 import { MarkdownString, ThemeColor, ThemeIcon, TreeItem } from "vscode";
 import { Execution, ExecutionStatus } from "../../../appwrite";
-import { functionsClient } from "../../../client";
-import { ext } from "../../../extensionVariables";
 import { msToDate } from "../../../utils/date";
 import { ExecutionsTreeItem } from "./ExecutionsTreeItem";
 
@@ -12,17 +10,11 @@ const executionStatusIcons: Record<ExecutionStatus, ThemeIcon> = {
     failed: new ThemeIcon("circle-filled", new ThemeColor("testing.iconFailed")),
 };
 
-function sleep(ms: number) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-}
-
 export class ExecutionTreeItem extends TreeItem {
     public isAutoRefreshing: boolean = false;
     private refreshCount: number = 0;
 
-    constructor(public readonly parent: ExecutionsTreeItem, public readonly execution: Execution) {
+    constructor(public readonly parent: ExecutionsTreeItem, public execution: Execution) {
         super(execution.$id);
         this.label = this.getLabel(execution);
         this.iconPath = executionStatusIcons[execution.status];
@@ -31,38 +23,43 @@ export class ExecutionTreeItem extends TreeItem {
         this.description = execution.trigger;
         this.contextValue = this.getContextValue(execution);
         this.isAutoRefreshing = execution.status === "processing" || execution.status === "waiting";
-        this.autoRefresh();
+        // if (this.isAutoRefreshing) {
+        //     this.autoRefresh();
+        // }
     }
 
-    async autoRefresh(): Promise<void> {
-        if (!this.isAutoRefreshing) {
-            return;
-        }
-        this.refreshCount++;
-        ext.outputChannel.appendLog("Refreshing execution.");
-        const execution = await functionsClient?.getExecution(this.parent.parent.func.$id, this.execution.$id);
+    // async autoRefresh(): Promise<void> {
+    //     if (!this.isAutoRefreshing && this.refreshCount < 5) {
+    //         return;
+    //     }
+    //     this.refreshCount++;
+    //     ext.outputChannel.appendLog("Refreshing execution.");
+    //     const execution = await functionsClient?.getExecution(this.parent.parent.func.$id, this.execution.$id);
 
-        if (!execution) {
-            ext.outputChannel.appendLog("Execution is undefined");
-            this.isAutoRefreshing = false;
-            return;
-        }
-
-        this.contextValue = this.getContextValue(execution);
-        this.iconPath = executionStatusIcons[execution.status];
-        this.label = this.getLabel(execution);
-        this.isAutoRefreshing = execution.status === "processing" || execution.status === "waiting";
-
-        ext.tree?.functions?.refreshChild(this);
-        await sleep(1000);
-        this.autoRefresh();
-    }
+    //     if (!execution) {
+    //         ext.outputChannel.appendLog("Execution is undefined");
+    //         this.isAutoRefreshing = false;
+    //         return;
+    //     }
+    //     this.execution = execution;
+    //     this.contextValue = this.getContextValue(execution);
+    //     this.iconPath = executionStatusIcons[execution.status];
+    //     this.label = this.getLabel(execution);
+    //     this.isAutoRefreshing = execution.status === "processing" || execution.status === "waiting";
+    //     ext.tree?.functions?.refreshChild(this);
+    //     await sleep(1000);
+    //     this.autoRefresh();
+    // }
 
     getLabel(execution: Execution): string {
         if (execution.status === "completed" || execution.status === "failed") {
-            return `${this.getCreated(execution)} (${execution.time.toPrecision(2)}s)`;
+            return `${this.getCreated(execution)} (${this.getExecutionTime(execution)}s)`;
         }
         return `${this.getCreated(execution)} (${execution.status})`;
+    }
+
+    getExecutionTime(execution: Execution): string {
+        return execution.time.toPrecision(2);
     }
 
     getContextValue(execution: Execution): string {

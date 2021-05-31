@@ -14,7 +14,22 @@ export class TagsTreeItem extends AppwriteTreeItemBase<FunctionTreeItem> {
             return [];
         }
         const tags = await functionsClient.listTags(this.parent.func.$id);
-        return tags?.tags.sort((a, b) => b.dateCreated - a.dateCreated).map((tag) => new TagTreeItem(this, tag)) ?? [new TreeItem('No tags.')];
+        const children = tags?.tags.sort((a, b) => b.dateCreated - a.dateCreated).map((tag) => new TagTreeItem(this, tag)) ?? [new TreeItem('No tags.')];
+
+        if (children.length === 0) {
+            const noTagsItem: TreeItem = {
+                command: {
+                    command: "vscode-appwrite.CreateTag",
+                    title: "Create tag",
+                    arguments: [this],
+                    tooltip: "Create a tag"
+                },
+                label: "Create a tag",
+                iconPath: new ThemeIcon("cloud-upload"),
+            };
+            children.push(noTagsItem);
+        }
+        return children;
     }
 
     collapsibleState = TreeItemCollapsibleState.Collapsed;

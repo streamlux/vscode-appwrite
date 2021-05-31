@@ -1,10 +1,10 @@
-import { Client, Execution, ExecutionList, FunctionsClient, TagList, Vars } from "../appwrite";
+import { Client, Execution, ExecutionList, FunctionsClient, FunctionsList, Tag, TagList, Vars } from "../appwrite";
 import { AppwriteSDK } from '../constants';
 import AppwriteCall from '../utils/AppwriteCall';
 import { ReadStream } from 'node:fs';
 
 export class Functions {
-    private readonly functions: FunctionsClient;
+    public readonly functions: FunctionsClient;
 
     constructor(client: Client) {
         this.functions = new AppwriteSDK.Functions(client);
@@ -13,7 +13,7 @@ export class Functions {
     public async create(name: string, execute: string[], env: string, vars?: Vars, events?: string[], schedule?: string, timeout?: number): Promise<any> {
         return await AppwriteCall(this.functions.create(name, execute, env, vars, events, schedule, timeout));
     }
-    public async list(search?: string, offset?: number, limit?: number, orderType?: 'ASC' | 'DESC'): Promise<any> {
+    public async list(search?: string, offset?: number, limit?: number, orderType?: 'ASC' | 'DESC'): Promise<FunctionsList | undefined> {
         return await AppwriteCall(this.functions.list(search, offset, limit, orderType));
     }
     public async get(functionId: string): Promise<any> {
@@ -28,7 +28,7 @@ export class Functions {
     public async delete(functionId: string): Promise<void> {
         return await AppwriteCall(this.functions.delete(functionId));
     }
-    public async createTag(functionId: string, command: string, code: ReadStream): Promise<any> {
+    public async createTag(functionId: string, command: string, code: ReadStream): Promise<Tag | undefined> {
         return await AppwriteCall(this.functions.createTag(functionId, command, code));
     }
     public async listTags(id: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC'): Promise<TagList | undefined> {
@@ -40,11 +40,11 @@ export class Functions {
     public async deleteTag(functionId: string, tagId: string): Promise<void> {
         return await AppwriteCall(this.functions.deleteTag(functionId, tagId));
     }
-    public async createExecution(functionId: string, data?: string): Promise<any> {
+    public async createExecution(functionId: string, data?: string): Promise<Execution | undefined> {
         return await AppwriteCall(this.functions.createExecution(functionId, data));
     }
     public async listExecutions(functionId: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC'): Promise<ExecutionList | undefined> {
-        return await AppwriteCall(this.functions.listExecutions(functionId, search, offset, limit, orderType));
+        return await AppwriteCall(this.functions.listExecutions(functionId, search, limit, offset, orderType));
     }
     public async getExecution(functionId: string, executionId: string): Promise<Execution | undefined> {
         return await AppwriteCall(this.functions.getExecution(functionId, executionId));

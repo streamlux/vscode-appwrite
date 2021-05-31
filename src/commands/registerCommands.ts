@@ -42,6 +42,8 @@ import { openExecutionsInBrowser } from './functions/openExecutionsInBrowser';
 import { openFunctionSettingsInBrowser } from './functions/openFunctionSettingsInBrowser';
 import { openFunctionTagsInBrowser } from './functions/openFunctionTagsInBrowser';
 
+import { viewMore } from './common/viewMore';
+
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
 
@@ -74,6 +76,7 @@ export function registerCommands(context: ExtensionContext): void {
 
     /** Common **/
     registerCommand("editValue", editValue);
+    registerCommand("viewMore", viewMore);
 
     /** General **/
     registerCommand("Connect", connectAppwrite, "all");
