@@ -18,11 +18,11 @@ From [appwrite.io](https://appwrite.io)
 
 ### Connect to multiple Appwrite projects
 
-![Mutliple projects](media/features/projects/projectsView1.gif)
+<img src="media/features/projects/projectsView1.gif" height="500">
 
 ### Create and manage Appwrite cloud functions, upload tags, and view function output
 
-![Functions feature](media/features/functions/functionsOverview.png)
+<img src="media/features/functions/functionsOverview.png" height="500">
 
 ### Creating function tags with ease!
 
