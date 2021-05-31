@@ -1,4 +1,4 @@
-import { Command, ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
+import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Execution, ExecutionList } from "../../../appwrite";
 import { functionsClient } from "../../../client";
 import { ExecutionTreeItem } from "./ExecutionTreeItem";
