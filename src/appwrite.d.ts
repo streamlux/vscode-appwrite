@@ -305,7 +305,7 @@ export type Client = {
     setSelfSigned: (value: boolean) => void;
 };
 export type UsersClient = {
-    deleteUser: (id: string) => Promise<any>;
+    delete: (id: string) => Promise<any>;
     deleteSessions: (id: string) => Promise<any>;
     create: (email: string, password: string, name?: string) => Promise<any>;
     getLogs: (id: string) => Promise<Log[]>;
