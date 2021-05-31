@@ -20,7 +20,7 @@ export async function deleteUser(userTreeItem: UserTreeItem): Promise<void> {
     );
 
     if (shouldDeleteUser === DialogResponses.yes) {
-        await usersClient.delete(userId);
+            await usersClient.delete(userId);
         refreshTree("users");
     }
 }

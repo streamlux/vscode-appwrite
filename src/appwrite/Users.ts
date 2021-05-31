@@ -16,7 +16,7 @@ export class Users {
     }
 
     public async delete(userId: string): Promise<void> {
-        await AppwriteCall(this.users.deleteUser(userId), () => {
+        await AppwriteCall(this.users.delete(userId), () => {
             window.showInformationMessage(`Deleted user with id: ${userId}.`);
         });
     }
