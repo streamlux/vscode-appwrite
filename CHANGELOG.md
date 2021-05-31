@@ -6,8 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.1.1] - 2021-5-31
 ## Added
-- You can now easily create function tags from multiple places in the extension.
+- You can now easily create function tags from multiple places in the extension. [PR #19](https://github.com/streamlux/vscode-appwrite/pull/19)
+
+## Fixed
+- Fixed an error when deleting a user. [Issue #17](https://github.com/streamlux/vscode-appwrite/issues/17) [PR #18](https://github.com/streamlux/vscode-appwrite/pull/18) Thanks [@aadarshadhakalg](https://github.com/aadarshadhakalg)!
 
 ## [0.1.0] - 2021-5-29
 

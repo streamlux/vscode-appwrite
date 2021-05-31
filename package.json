@@ -2,7 +2,7 @@
     "name": "vscode-appwrite",
     "displayName": "Appwrite",
     "description": "Manage your Appwrite resources right from VS Code!",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "engines": {
         "vscode": "^1.55.0"
     },
