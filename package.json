@@ -223,6 +223,11 @@
                 "category": "Appwrite"
             },
             {
+                "command": "vscode-appwrite.refreshFunctions",
+                "title": "Refresh functions",
+                "icon": "$(refresh)"
+            },
+            {
                 "command": "vscode-appwrite.removeProject",
                 "title": "Remove project",
                 "icon": "$(trash)",
