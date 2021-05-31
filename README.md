@@ -18,15 +18,15 @@ From [appwrite.io](https://appwrite.io)
 
 ### Connect to multiple Appwrite projects
 
-<img src="media/features/projects/projectsView1.gif" height="500">
-
-### Create and manage Appwrite cloud functions, upload tags, and view function output
-
-<img src="media/features/functions/functionsOverview.png" height="500">
+<img src="media/features/projects/projectsView1.gif" height="600">
 
 ### Creating function tags with ease!
 
 ![Functions feature](media/features/functions/CreateTag.gif)
+
+### Create and manage Appwrite cloud functions, upload tags, and view function output
+
+<img src="media/features/functions/functionsOverview.png" height="500">
 
 ### View database documents right inside VS Code.
 
