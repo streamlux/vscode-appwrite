@@ -5,7 +5,7 @@ import { ext } from "../../../extensionVariables";
 import cron from "cron-validate";
 import { FunctionSettingsTreeItem } from "./FunctionSettingsTreeItem";
 import cronstrue from "cronstrue";
-import { StringEditableTreeItemBase } from '../../common/StringEditableTreeItem';
+import { StringEditableTreeItemBase } from '../../common/editable/StringEditableTreeItem';
 
 export class ScheduleTreeItem extends StringEditableTreeItemBase {
     private readonly func: Function;

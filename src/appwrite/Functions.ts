@@ -1,10 +1,10 @@
-import { Client, Execution, ExecutionList, FunctionsClient, TagList, Vars } from "../appwrite";
+import { Client, Execution, ExecutionList, FunctionsClient, Tag, TagList, Vars } from "../appwrite";
 import { AppwriteSDK } from '../constants';
 import AppwriteCall from '../utils/AppwriteCall';
 import { ReadStream } from 'node:fs';
 
 export class Functions {
-    private readonly functions: FunctionsClient;
+    public readonly functions: FunctionsClient;
 
     constructor(client: Client) {
         this.functions = new AppwriteSDK.Functions(client);
@@ -28,7 +28,7 @@ export class Functions {
     public async delete(functionId: string): Promise<void> {
         return await AppwriteCall(this.functions.delete(functionId));
     }
-    public async createTag(functionId: string, command: string, code: ReadStream): Promise<any> {
+    public async createTag(functionId: string, command: string, code: ReadStream): Promise<Tag | undefined> {
         return await AppwriteCall(this.functions.createTag(functionId, command, code));
     }
     public async listTags(id: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC'): Promise<TagList | undefined> {
@@ -40,7 +40,7 @@ export class Functions {
     public async deleteTag(functionId: string, tagId: string): Promise<void> {
         return await AppwriteCall(this.functions.deleteTag(functionId, tagId));
     }
-    public async createExecution(functionId: string, data?: string): Promise<any> {
+    public async createExecution(functionId: string, data?: string): Promise<Execution | undefined> {
         return await AppwriteCall(this.functions.createExecution(functionId, data));
     }
     public async listExecutions(functionId: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC'): Promise<ExecutionList | undefined> {

@@ -2,7 +2,7 @@ import { InputBoxOptions, MarkdownString } from "vscode";
 import { Function } from "../../../appwrite";
 import { functionsClient } from "../../../client";
 import { ext } from "../../../extensionVariables";
-import { StringEditableTreeItemBase } from "../../common/StringEditableTreeItem";
+import { StringEditableTreeItemBase } from "../../common/editable/StringEditableTreeItem";
 
 function isNumeric(str: string) {
     console.log("here");

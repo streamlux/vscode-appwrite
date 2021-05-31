@@ -17,7 +17,7 @@ export type AppwriteTree = {
 };
 
 export type Ext = {
-    context?: ExtensionContext;
+    context: ExtensionContext;
     outputChannel: AppwriteOutputChannel;
     tree?: AppwriteTree;
 };

@@ -3,12 +3,12 @@ import { DocumentsList } from "../../appwrite";
 import { client } from "../../client";
 import { AppwriteSDK } from "../../constants";
 import { ext } from "../../extensionVariables";
-import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
+import { AwTreeItem } from "../common/AwTreeItem";
 import AppwriteCall from "../../utils/AppwriteCall";
 import { CollectionTreeItem } from "./CollectionTreeItem";
 import { DocumentTreeItem } from "./DocumentTreeItem";
 
-export class DocumentsTreeItem extends AppwriteTreeItemBase<CollectionTreeItem> {
+export class DocumentsTreeItem extends AwTreeItem<CollectionTreeItem> {
     constructor(parent: CollectionTreeItem) {
         super(parent, "Documents");
     }

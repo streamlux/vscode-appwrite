@@ -3,7 +3,7 @@ import { Function } from "../../../appwrite";
 import { functionsClient } from "../../../client";
 import { appwriteSystemEvents } from "../../../constants";
 import { ext } from "../../../extensionVariables";
-import { EnumEditableTreeItemBase } from "../../common/EnumEditableTreeItem";
+import { EnumEditableTreeItemBase } from "../../common/editable/EnumEditableTreeItem";
 import { FunctionSettingsTreeItem } from "./FunctionSettingsTreeItem";
 
 export class EventsTreeItem extends EnumEditableTreeItemBase {

@@ -1,40 +1,64 @@
-import { ProgressLocation, Uri, window } from "vscode";
-import { functionsClient, storageClient } from "../../client";
+import { ProgressLocation, Uri, window, workspace } from "vscode";
+import { functionsClient } from "../../client";
 import { getTarReadStream } from "../../utils/tar";
 import { ext } from "../../extensionVariables";
 import * as fs from "fs";
 import { TagsTreeItem } from "../../tree/functions/tags/TagsTreeItem";
 import { selectWorkspaceFolder } from "../../utils/workspace";
+import { ProgressMessage } from '../../utils/types';
+import { Tag } from '../../appwrite';
+
 export async function createTag(item: TagsTreeItem | Uri): Promise<void> {
     if (item instanceof Uri) {
-        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (_progress, _token) => {
-            await createTagFromUri(item);
+        const tag = await window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (progress, _token) => {
+            return await createTagFromUri(item, progress);
         });
+        if (tag) {
+            await window.showInformationMessage(`Successfully created tag with size ${tag.size}B.`, "Execution function", "View in console");
+            return;
+        }
         return;
     }
 
     if (item instanceof TagsTreeItem) {
         const folder = await selectWorkspaceFolder("Select folder of your function code.");
         console.log(folder);
-        window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (_progress, _token) => {
-            await createTagFromUri(Uri.parse(folder));
+        const tag = await window.withProgress({ location: ProgressLocation.Notification, title: "Creating tag..." }, async (progress, _token) => {
+            return await createTagFromUri(Uri.parse(folder), progress);
         });
+
+        if (tag) {
+            await window.showInformationMessage(`Successfully created tag with size ${tag.size}B.`);
+            return;
+        }
     }
 }
 
-async function createTagFromUri(uri: Uri): Promise<void> {
-    const tarFilePath = await getTarReadStream(uri);
+async function createTagFromUri(uri: Uri, progress: ProgressMessage): Promise<Tag | undefined> {
+
+    progress.report({message: "Creating tarball", increment: 10});
+
     if (functionsClient === undefined) {
         return;
     }
 
-    if (tarFilePath === undefined) {
-        ext.outputChannel.appendLog("Error creating tar file.");
+    let tarFilePath;
+    try {
+        tarFilePath = await getTarReadStream(uri);
+    } catch (e) {
+        window.showErrorMessage("Error creating tar file.\n" + e);
         return;
     }
+    if (tarFilePath === undefined) {
+        window.showErrorMessage("Failed to create tar file.");
+        ext.outputChannel.appendLog("Failed to create tar file.");
+        return;
+    }
+    // somehow makes the upload work
+    await workspace.fs.readFile(Uri.file(tarFilePath));
+    progress.report({message: "Uploading tag", increment: 60});
     try {
-        await functionsClient.createTag("60b1836a8e5d9", "python ./hello.py", fs.createReadStream(tarFilePath));
-        await storageClient?.createFile(fs.createReadStream(tarFilePath));
+        return await functionsClient.createTag("60b1836a8e5d9", "python ./hello.py", fs.createReadStream(tarFilePath));
     } catch (e) {
         ext.outputChannel.appendLog("Creating tag error: " + e);
     }

@@ -2,10 +2,11 @@ import * as vscode from "vscode";
 import { client } from "../../client";
 import { Function, FunctionsList } from "../../appwrite";
 import { AppwriteSDK } from "../../constants";
-import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
+import { AwTreeItem } from "../common/AwTreeItem";
 import { ext } from "../../extensionVariables";
 import { EventEmitter, TreeItem } from "vscode";
 import { FunctionTreeItem } from "./FunctionTreeItem";
+import { AwParentTreeItem } from '../common/AwParentTreeItem';
 
 export class FunctionsTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     private _onDidChangeTreeData: EventEmitter<TreeItem | undefined | void> = new EventEmitter<TreeItem | undefined | void>();
@@ -25,7 +26,7 @@ export class FunctionsTreeItemProvider implements vscode.TreeDataProvider<vscode
         return element;
     }
 
-    async getChildren(parent?: AppwriteTreeItemBase | TreeItem): Promise<vscode.TreeItem[]> {
+    async getChildren(parent?: AwTreeItem | TreeItem): Promise<vscode.TreeItem[]> {
         if (client === undefined) {
             return Promise.resolve([]);
         }
@@ -43,8 +44,8 @@ export class FunctionsTreeItemProvider implements vscode.TreeDataProvider<vscode
             return [{ label: "No functions found" }];
         }
 
-        if (parent instanceof AppwriteTreeItemBase) {
-            return parent.getChildren?.() ?? [];
+        if (parent instanceof AwParentTreeItem) {
+            return parent.getChildren();
         }
 
         return [];

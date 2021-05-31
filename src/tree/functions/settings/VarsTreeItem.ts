@@ -1,10 +1,10 @@
 import { TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Vars } from "../../../appwrite";
-import { AppwriteTreeItemBase } from "../../../ui/AppwriteTreeItemBase";
+import { AwTreeItem } from "../../common/AwTreeItem";
 import { FunctionSettingsTreeItem } from "./FunctionSettingsTreeItem";
 import { VarTreeItem } from "./VarTreeItem";
 
-export class VarsTreeItem extends AppwriteTreeItemBase<FunctionSettingsTreeItem> {
+export class VarsTreeItem extends AwTreeItem<FunctionSettingsTreeItem> {
     public readonly vars: Vars;
 
     constructor(parent: FunctionSettingsTreeItem) {

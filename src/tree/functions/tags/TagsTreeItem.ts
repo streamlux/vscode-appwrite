@@ -1,10 +1,11 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
 import { functionsClient } from "../../../client";
-import { AppwriteTreeItemBase } from '../../../ui/AppwriteTreeItemBase';
+import { AwParentTreeItem } from '../../common/AwParentTreeItem';
+import { AwTreeItem } from '../../common/AwTreeItem';
 import { FunctionTreeItem } from '../FunctionTreeItem';
 import { TagTreeItem } from './TagTreeItem';
 
-export class TagsTreeItem extends AppwriteTreeItemBase<FunctionTreeItem> {
+export class TagsTreeItem extends AwParentTreeItem {
     constructor(public readonly parent: FunctionTreeItem) {
         super(parent, "Tags");
     }
