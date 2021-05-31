@@ -10,7 +10,7 @@ export class TagTreeItem extends TreeItem {
         const active = func.tag === tag.$id;
         this.label = `${msToDate(tag.dateCreated)}${active ? ' (Active)' : ''}`;
         this.description = tag.$id;
-        this.iconPath = new ThemeIcon(active ? 'circle-filled' : 'circle-outline');
+        this.iconPath = new ThemeIcon(active ? 'circle-large-filled' : 'circle-large-outline');
         this.contextValue = `tag${active ? '_active' : ''}`;
         this.tooltip = new MarkdownString(`ID: ${tag.$id}  \nCreated: ${msToDate(tag.dateCreated)}  \nCommand: ${tag.command}  \nSize: ${tag.size}B`);
     }

@@ -15,6 +15,7 @@ export async function createExecution(functionTreeItem: FunctionTreeItem): Promi
 export async function executeFunction(functionId: string): Promise<void> {
     ext.outputChannel.appendLog(`Creating execution for function with ID: ${functionId}`);
     let execution = await functionsClient?.createExecution(functionId);
+    ext.outputChannel.appendLog(JSON.stringify(execution, null, 2));
     await ext.tree?.functions?.refresh();
 
     if (execution === undefined) {
@@ -22,6 +23,7 @@ export async function executeFunction(functionId: string): Promise<void> {
     }
 
     execution = await waitForExecution(execution);
+    ext.tree?.functions?.refresh();
 
     if (execution === undefined) {
         return;
@@ -41,12 +43,11 @@ export async function executeFunction(functionId: string): Promise<void> {
 }
 
 async function waitForExecution(execution: Execution | undefined): Promise<Execution | undefined> {
-    ext.outputChannel.appendLog("Waiting for execution...");
     if (execution === undefined) {
         return;
     }
     if (execution.status === "processing" || execution.status === "waiting") {
-        await sleep(2000);
+        await sleep(5000);
 
         ext.outputChannel.appendLog("Execution still ...");
         return await waitForExecution(await functionsClient?.getExecution(execution.functionId, execution.$id));

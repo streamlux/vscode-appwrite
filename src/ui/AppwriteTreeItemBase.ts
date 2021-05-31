@@ -7,4 +7,7 @@ export abstract class AppwriteTreeItemBase<Parent = void> extends TreeItem {
 
     abstract getChildren?(): Promise<TreeItem[]>;
 
+    viewMore(): Promise<void> {
+        return Promise.resolve();
+    }
 }

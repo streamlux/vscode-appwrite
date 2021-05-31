@@ -6,6 +6,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## Added
+- You can now easily create function tags from multiple places in the extension.
+
 ## [0.1.0] - 2021-5-29
 
 ## Functions!

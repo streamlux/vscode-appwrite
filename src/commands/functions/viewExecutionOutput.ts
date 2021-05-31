@@ -7,11 +7,13 @@ export async function viewExecutionOutput(executionItem: ExecutionTreeItem | Exe
         return;
     }
 
+
     let execution = executionItem as Execution;
 
     if (executionItem instanceof ExecutionTreeItem) {
         execution = executionItem.execution;
     }
+    console.log(execution.dateCreated);
 
     await openReadOnlyContent({ label: `Execution stdout`, fullId: `${execution.$id}-output.txt` }, execution.stdout, '.txt');
 }

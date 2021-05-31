@@ -1,11 +1,11 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Permissions } from "../../../appwrite";
-import { AwTreeItem } from "../../common/AwTreeItem";
+import { AppwriteTreeItemBase } from "../../../ui/AppwriteTreeItemBase";
 import { CollapsableTreeItem } from "../../CollapsableTreeItem";
 import { CollectionTreeItem } from "../CollectionTreeItem";
 import { PermissionTreeItem } from "./PermissionTreeItem";
 
-export class PermissionsTreeItem extends AwTreeItem<CollectionTreeItem> {
+export class PermissionsTreeItem extends AppwriteTreeItemBase<CollectionTreeItem> {
     public readonly permissions: Permissions;
 
     constructor(parent: CollectionTreeItem) {

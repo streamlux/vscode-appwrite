@@ -1,11 +1,11 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Rule } from "../../../appwrite";
-import { AwTreeItem } from "../../common/AwTreeItem";
+import { AppwriteTreeItemBase } from "../../../ui/AppwriteTreeItemBase";
 import { CommandTreeItem } from "../../CommandTreeItem";
 import { CollectionTreeItem } from "../CollectionTreeItem";
 import { RuleTreeItem } from "./RuleTreeItem";
 
-export class RulesTreeItem extends AwTreeItem<CollectionTreeItem> {
+export class RulesTreeItem extends AppwriteTreeItemBase<CollectionTreeItem> {
     public readonly rules: Rule[];
 
     constructor(parent: CollectionTreeItem) {

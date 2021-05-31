@@ -5,5 +5,5 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export function msToDate(ms: number): string {
-    return dayjs(ms * 1000).tz("America/Chicago").format("LTS");
+    return dayjs(ms * 1000).tz(dayjs.tz.guess()).format("LTS");
 }

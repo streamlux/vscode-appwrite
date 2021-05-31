@@ -1,7 +1,7 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Function } from "../../../appwrite";
 import { functionsClient } from "../../../client";
-import { AwTreeItem } from "../../common/AwTreeItem";
+import { AppwriteTreeItemBase } from '../../../ui/AppwriteTreeItemBase';
 import { ChildTreeItem } from "../../ChildTreeItem";
 import { FunctionTreeItem } from "../FunctionTreeItem";
 import { EventsTreeItem } from "./EventsTreeItem";
@@ -10,7 +10,7 @@ import { ScheduleTreeItem } from "./ScheduleTreeItem";
 import { TimeoutTreeItem } from "./TimeoutTreeItem";
 import { VarsTreeItem } from "./VarsTreeItem";
 
-export class FunctionSettingsTreeItem extends AwTreeItem<FunctionTreeItem> {
+export class FunctionSettingsTreeItem extends AppwriteTreeItemBase<FunctionTreeItem> {
     public readonly func: Function;
 
     constructor(public readonly parent: FunctionTreeItem) {

@@ -1,4 +1,4 @@
-import { Client, Execution, ExecutionList, FunctionsClient, Tag, TagList, Vars } from "../appwrite";
+import { Client, Execution, ExecutionList, FunctionsClient, FunctionsList, Tag, TagList, Vars } from "../appwrite";
 import { AppwriteSDK } from '../constants';
 import AppwriteCall from '../utils/AppwriteCall';
 import { ReadStream } from 'node:fs';
@@ -13,7 +13,7 @@ export class Functions {
     public async create(name: string, execute: string[], env: string, vars?: Vars, events?: string[], schedule?: string, timeout?: number): Promise<any> {
         return await AppwriteCall(this.functions.create(name, execute, env, vars, events, schedule, timeout));
     }
-    public async list(search?: string, offset?: number, limit?: number, orderType?: 'ASC' | 'DESC'): Promise<any> {
+    public async list(search?: string, offset?: number, limit?: number, orderType?: 'ASC' | 'DESC'): Promise<FunctionsList | undefined> {
         return await AppwriteCall(this.functions.list(search, offset, limit, orderType));
     }
     public async get(functionId: string): Promise<any> {
@@ -44,7 +44,7 @@ export class Functions {
         return await AppwriteCall(this.functions.createExecution(functionId, data));
     }
     public async listExecutions(functionId: string, search?: string, limit?: number, offset?: number, orderType?: 'ASC' | 'DESC'): Promise<ExecutionList | undefined> {
-        return await AppwriteCall(this.functions.listExecutions(functionId, search, offset, limit, orderType));
+        return await AppwriteCall(this.functions.listExecutions(functionId, search, limit, offset, orderType));
     }
     public async getExecution(functionId: string, executionId: string): Promise<Execution | undefined> {
         return await AppwriteCall(this.functions.getExecution(functionId, executionId));
