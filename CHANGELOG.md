@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.1.2] - 2021-6-03
 ## Added
-Ability to set the `list`, `default` and `array` properties when creating a new collection. | [Issue #20](https://github.com/streamlux/vscode-appwrite/issues/20) | [PR #21](https://github.com/streamlux/vscode-appwrite/pull/21) | Thanks [@Maatteogekko](https://github.com/Maatteogekko)!
+- Ability to set the `list`, `default` and `array` properties when creating a new collection. | [Issue #20](https://github.com/streamlux/vscode-appwrite/issues/20) | [PR #21](https://github.com/streamlux/vscode-appwrite/pull/21) | Thanks [@Maatteogekko](https://github.com/Maatteogekko)!
 
 ## [0.1.1] - 2021-5-31
 ## Added
