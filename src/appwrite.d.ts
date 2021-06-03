@@ -276,7 +276,7 @@ export type CollectionsList = {
     collections: Collection[];
 };
 
-export type CreatedRule = Omit<Rule, "$id" | "$collection" | "default" | "list">;
+export type CreatedRule = Omit<Rule, "$id" | "$collection">;
 
 export type Rule = {
     $id: string;
@@ -284,10 +284,10 @@ export type Rule = {
     type: string;
     key: string;
     label: string;
-    default: string;
-    array: boolean;
+    default?: any;
     required: boolean;
-    list: string[];
+    array: boolean;
+    list?: string[];
 };
 
 export type Permissions = {
