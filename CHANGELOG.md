@@ -6,6 +6,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## Added
+Ability to set the `list`, `default` and `array` properties when creating a new collection. | [Issue #20](https://github.com/streamlux/vscode-appwrite/issues/20) | [PR #21](https://github.com/streamlux/vscode-appwrite/pull/21) | Thanks [@Maatteogekko](https://github.com/Maatteogekko)!
+
 ## [0.1.1] - 2021-5-31
 ## Added
 - You can now easily create function tags from multiple places in the extension. [PR #19](https://github.com/streamlux/vscode-appwrite/pull/19)

@@ -10,15 +10,13 @@ export async function createRule(rulesTreeItem: RulesTreeItem): Promise<void> {
         return;
     }
 
-    const ruleContext = await createRuleWizard();
     const collection = rulesTreeItem.parent.collection;
+    const ruleContext = await createRuleWizard(collection);
 
     if (ruleContext) {
         const newRule: CreatedRule = {
             ...ruleContext,
             type: ruleContext.type,
-            required: true,
-            array: false,
         };
 
         databaseClient.createRule(collection, newRule);
