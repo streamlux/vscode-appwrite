@@ -8,6 +8,8 @@ import { selectWorkspaceFolder } from "../../utils/workspace";
 import { ProgressMessage } from "../../utils/types";
 import { Tag } from "../../appwrite";
 import { activateTag } from "./activateTag";
+import { sleep } from '../../utils/sleep';
+import { openFunctionTagsInBrowser } from './openFunctionTagsInBrowser';
 
 export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
     if (item instanceof Uri) {
@@ -136,7 +138,8 @@ async function createTagFromUri(functionId: string, command: string, uri: Uri, p
         return;
     }
     // somehow makes the upload work
-    await workspace.fs.readFile(Uri.file(tarFilePath));
+    // await workspace.fs.readFile(Uri.file(tarFilePath));
+    await sleep(1000);
     progress.report({ message: "Uploading tag", increment: 60 });
     try {
         return await functionsClient.createTag(functionId, command, fs.createReadStream(tarFilePath));
@@ -158,6 +161,7 @@ async function tagNotification(tag: Tag): Promise<void> {
         }
         if (action === "View in console") {
             //
+            await openFunctionTagsInBrowser(tag.functionId);
         }
         return;
     }
