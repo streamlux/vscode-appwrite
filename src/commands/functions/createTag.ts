@@ -10,6 +10,7 @@ import { Tag } from "../../appwrite";
 import { activateTag } from "./activateTag";
 import { sleep } from '../../utils/sleep';
 import { openFunctionTagsInBrowser } from './openFunctionTagsInBrowser';
+import { executeFunction } from './createExecution';
 
 export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
     if (item instanceof Uri) {
@@ -158,6 +159,13 @@ async function tagNotification(tag: Tag): Promise<void> {
         );
         if (action === "Activate tag") {
             await activateTag(tag);
+            const action = await window.showInformationMessage(
+                `Successfully activated tag.`,
+                "Execute function",
+            );
+            if (action === 'Execute function') {
+                await executeFunction(tag.functionId);
+            }
         }
         if (action === "View in console") {
             //
