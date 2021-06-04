@@ -1,6 +1,7 @@
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from "vscode";
 import { Collection } from "../../appwrite";
-import { databaseClient } from "../../client";
+import { clientConfig, databaseClient } from "../../client";
+import { getConsoleUrlFromEndpoint } from '../../commands/users/openUserInConsole';
 import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
 import { DatabaseTreeItemProvider } from "./DatabaseTreeItemProvider";
 import { DocumentsTreeItem } from "./DocumentsTreeItem";
@@ -10,6 +11,12 @@ import { RulesTreeItem } from "./settings/RulesTreeItem";
 export class CollectionTreeItem extends AppwriteTreeItemBase {
     constructor(public collection: Collection, public readonly provider: DatabaseTreeItemProvider) {
         super(undefined, collection.name);
+    }
+
+    // https://console.streamlux.com/console/database/collection?id=607cb2d6a21a8&project=605ce39a30c01
+    public getUrl(): string {
+        const consoleUrl = getConsoleUrlFromEndpoint(clientConfig.endpoint);
+        return `${consoleUrl}/database/collection?id=${this.collection.$id}&project=${clientConfig.projectId}`;
     }
 
     public async getChildren(): Promise<TreeItem[]> {

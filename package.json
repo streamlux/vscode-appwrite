@@ -336,6 +336,12 @@
                 "category": "Appwrite"
             },
             {
+                "command": "vscode-appwrite.openCollectionInBrowser",
+                "title": "Open collection in browser",
+                "icon": "$(link-external)",
+                "category": "Appwrite"
+            },
+            {
                 "command": "vscode-appwrite.viewMore",
                 "title": "View more",
                 "category": "Appwrite"
@@ -487,6 +493,11 @@
                 {
                     "command": "vscode-appwrite.viewCollectionAsJson",
                     "when": "viewItem == collection"
+                },
+                {
+                    "command": "vscode-appwrite.openCollectionInBrowser",
+                    "when": "viewItem == collection",
+                    "group": "inline"
                 },
                 {
                     "command": "vscode-appwrite.deleteCollection",
