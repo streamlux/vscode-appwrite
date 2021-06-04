@@ -345,6 +345,18 @@
                 "command": "vscode-appwrite.viewMore",
                 "title": "View more",
                 "category": "Appwrite"
+            },
+            {
+                "command": "vscode-appwrite.uploadFile",
+                "title": "Upload file to storage",
+                "icon": "$(cloud-upload)",
+                "category": "Appwrite"
+            },
+            {
+                "command": "vscode-appwrite.downloadFile",
+                "title": "Download file",
+                "icon": "$(cloud-download)",
+                "category": "Appwrite"
             }
         ],
         "views": {
@@ -455,6 +467,11 @@
                 {
                     "command": "vscode-appwrite.createFunction",
                     "when": "view == Functions",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-appwrite.uploadFile",
+                    "when": "view == Storage",
                     "group": "navigation"
                 }
             ],
@@ -631,6 +648,11 @@
                     "command": "vscode-appwrite.CreateTag",
                     "when": "viewItem =~ /^tags$/",
                     "group": "inline"
+                },
+                {
+                    "command": "vscode-appwrite.downloadFile",
+                    "when": "viewItem =~ /^file$/",
+                    "group": "inline"
                 }
             ],
             "explorer/context": [
@@ -775,6 +797,7 @@
         "cron-validate": "^1.4.3",
         "cronstrue": "^1.113.0",
         "dayjs": "^1.10.4",
+        "downloads-folder": "^3.0.1",
         "fs-extra": "^9.1.0",
         "node-appwrite": "^2.2.3",
         "tar": "^6.1.0"

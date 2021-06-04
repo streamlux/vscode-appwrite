@@ -14,6 +14,14 @@ export class Storage {
         return await AppwriteCall(this.storage.listFiles());
     }
 
+    public async getFileDownload(fileId: string): Promise<any> {
+        return await AppwriteCall(this.storage.getFileDownload(fileId));
+    }
+
+    public async getFileView(fileId: string): Promise<any> {
+        return await AppwriteCall(this.storage.getFileView(fileId));
+    }
+
     public async createFile(file: ReadStream): Promise<void> {
         return await AppwriteCall(this.storage.createFile(file));
     }

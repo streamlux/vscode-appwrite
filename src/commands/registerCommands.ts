@@ -44,6 +44,8 @@ import { openFunctionTagsInBrowser } from './functions/openFunctionTagsInBrowser
 
 import { viewMore } from './common/viewMore';
 import { openCollectionInBrowser } from './database/openCollectionInBrowser';
+import { uploadFile } from './storage/uploadFile';
+import { downloadFile } from './storage/downloadFile';
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -115,6 +117,9 @@ export function registerCommands(context: ExtensionContext): void {
 
     /** Storage **/
     registerCommand("refreshStorage", undefined, "storage");
+    registerCommand("uploadFile", uploadFile, "storage");
+    registerCommand("downloadFile", downloadFile);
+
     registerCommand("openStorageDocumentation", () => openDocumentation("storage"));
 
     /** Projects **/

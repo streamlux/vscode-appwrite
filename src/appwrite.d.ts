@@ -362,6 +362,9 @@ export type StorageClient = {
     createFile: (file: any, read?: string[], write?: string[]) => Promise<any>;
     listFiles: () => Promise<any>;
     getFile: (fileId: string) => Promise<any>;
+    getFileDownload: (fileId: string) => Promise<any>;
+    getFileView: (fileId: string) => Promise<any>;
+    deleteFile: (fileId: string) => Promise<any>;
 };
 
 type Vars = Record<string, any>;
