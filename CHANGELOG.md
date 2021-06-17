@@ -5,6 +5,8 @@ All notable changes to the "vscode-appwrite" extension will be documented in thi
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
+## Added
+- New feature! JSON strings inside documents will now be automatically formatted as JSON when viewing documents. You can turn this feature off via the `appwrite.formatJsonStrings` setting.
 
 ## [0.1.2] - 2021-6-03
 ## Added
