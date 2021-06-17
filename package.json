@@ -726,6 +726,11 @@
                     "type": "string",
                     "default": "",
                     "markdownDescription": "Project id of the active project, see [docs](https://github.com/streamlux/vscode-appwrite/) for more information."
+                },
+                "appwrite.formatJsonStrings": {
+                    "type": "boolean",
+                    "default": true,
+                    "markdownDescription": "Format JSON strings when viewing documents"
                 }
             }
         }
