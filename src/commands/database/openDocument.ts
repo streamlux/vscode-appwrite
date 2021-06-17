@@ -20,7 +20,7 @@ export async function viewDocumentAsJson(documentTreeItem: DocumentTreeItem): Pr
         Object.entries(document).forEach(([key, value]) => {
             if (typeof value === "string") {
                 const result = parseJSONString(value);
-                document[key] = result;
+                document[key] = result.value;
             }
         });
     }
