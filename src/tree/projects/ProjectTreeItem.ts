@@ -17,6 +17,7 @@ export class ProjectTreeItem extends AppwriteTreeItemBase {
         const name = project.nickname ?? "Project";
         this.label = `${name}`;
         this.contextValue = `appwriteProject${active ? "_active" : ""}`;
+        this.description = project.endpoint;
 
         this.sdk = createAppwriteSdk(project);
     }

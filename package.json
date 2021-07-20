@@ -354,6 +354,11 @@
         "menus": {
             "view/title": [
                 {
+                    "command": "vscode-appwrite.addProject",
+                    "when": "view == Projects",
+                    "group": "navigation"
+                },
+                {
                     "command": "vscode-appwrite.OpenUsersDocumentation",
                     "when": "view == Users",
                     "group": "navigation"
@@ -510,11 +515,6 @@
                 {
                     "command": "vscode-appwrite.deletePermission",
                     "when": "viewItem =~ /^(permission)$/",
-                    "group": "inline"
-                },
-                {
-                    "command": "vscode-appwrite.setActiveProject",
-                    "when": "viewItem =~ /^(appwriteProject)$/",
                     "group": "inline"
                 },
                 {

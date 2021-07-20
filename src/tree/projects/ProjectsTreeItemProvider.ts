@@ -36,6 +36,8 @@ export class ProjectsTreeItemProvider implements vscode.TreeDataProvider<vscode.
             return [];
         }
         const activeProjectId = await getActiveProjectId();
-        return configs.map((config) => new ProjectTreeItem(config, config.projectId === activeProjectId));
+        const projectTreeItems = configs.map((config) => new ProjectTreeItem(config, config.projectId === activeProjectId));
+
+        return projectTreeItems;
     }
 }

@@ -30,7 +30,6 @@ export async function addProjectConfiguration(projectConfig: AppwriteProjectConf
     const projects = await getAppwriteProjects();
 
     await configuration.update("projects", [...projects, projectConfig], true);
-    await setActiveProjectId(projectConfig.projectId);
 }
 
 export async function getActiveProjectId(): Promise<string> {
@@ -53,19 +52,7 @@ export async function getActiveProjectConfiguration(): Promise<AppwriteProjectCo
             activeConfig = config;
         }
     });
-
-    if (activeConfig === undefined) {
-        activeConfig = configurations[0];
-        setActiveProjectId(configurations[0].projectId);
-    }
     return activeConfig;
-}
-
-export async function setActiveProjectId(projectId: string): Promise<void> {
-    const configuration = workspace.getConfiguration("appwrite");
-    await configuration.update("activeProjectId", projectId, true);
-    const active = await getActiveProjectConfiguration();
-    createAppwriteClient(active);
 }
 
 export async function updateActiveProjectId(): Promise<void> {

@@ -23,26 +23,25 @@ import { openUserInConsole } from "./users/openUserInConsole";
 import { refreshUsersList } from "./users/refreshUsersList";
 import { viewUserPrefs } from "./users/viewUserPrefs";
 import { editPermission } from "./database/permissions/editPermission";
-import { setActiveProject } from "./project/setActiveProject";
 import { removeProject } from "./project/removeProject";
-import { createTag } from './functions/createTag';
-import { createExecution } from './functions/createExecution';
-import { activateTag } from './functions/activateTag';
-import { editValue } from './common/editValue';
-import { deleteFunction } from './functions/deleteFunction';
-import { createFunction } from './functions/createFunction';
-import { createFunctionVar } from './functions/createFunctionVar';
-import { deleteFunctionVar } from './functions/deleteFunctionVar';
-import { deleteTag } from './functions/deleteTag';
-import { viewExecutionErrors } from './functions/viewExecutionErrors';
-import { viewExecutionOutput } from './functions/viewExecutionOutput';
-import { copyExecutionErrors } from './functions/copyExecutionErrors';
-import { copyExecutionOutput } from './functions/copyExecutionOutput';
-import { openExecutionsInBrowser } from './functions/openExecutionsInBrowser';
-import { openFunctionSettingsInBrowser } from './functions/openFunctionSettingsInBrowser';
-import { openFunctionTagsInBrowser } from './functions/openFunctionTagsInBrowser';
+import { createTag } from "./functions/createTag";
+import { createExecution } from "./functions/createExecution";
+import { activateTag } from "./functions/activateTag";
+import { editValue } from "./common/editValue";
+import { deleteFunction } from "./functions/deleteFunction";
+import { createFunction } from "./functions/createFunction";
+import { createFunctionVar } from "./functions/createFunctionVar";
+import { deleteFunctionVar } from "./functions/deleteFunctionVar";
+import { deleteTag } from "./functions/deleteTag";
+import { viewExecutionErrors } from "./functions/viewExecutionErrors";
+import { viewExecutionOutput } from "./functions/viewExecutionOutput";
+import { copyExecutionErrors } from "./functions/copyExecutionErrors";
+import { copyExecutionOutput } from "./functions/copyExecutionOutput";
+import { openExecutionsInBrowser } from "./functions/openExecutionsInBrowser";
+import { openFunctionSettingsInBrowser } from "./functions/openFunctionSettingsInBrowser";
+import { openFunctionTagsInBrowser } from "./functions/openFunctionTagsInBrowser";
 
-import { viewMore } from './common/viewMore';
+import { viewMore } from "./common/viewMore";
 
 class CommandRegistrar {
     constructor(private readonly context: ExtensionContext) {}
@@ -116,7 +115,6 @@ export function registerCommands(context: ExtensionContext): void {
 
     /** Projects **/
     registerCommand("addProject", connectAppwrite, "all");
-    registerCommand("setActiveProject", setActiveProject, "all");
     registerCommand("refreshProjects", undefined, "projects");
     registerCommand("removeProject", removeProject, "all");
 
