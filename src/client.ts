@@ -42,3 +42,10 @@ export function createAppwriteClient(config?: AppwriteProjectConfiguration): voi
     storageClient = undefined;
     functionsClient = undefined;
 }
+
+export function createAppwriteSdk(config: AppwriteProjectConfiguration): Client {
+    const client = new AppwriteSDK.Client();
+    const { endpoint, projectId, secret, selfSigned } = config;
+    client.setEndpoint(endpoint).setProject(projectId).setKey(secret).setSelfSigned(selfSigned);
+    return client;
+}

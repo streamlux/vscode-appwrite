@@ -27,10 +27,7 @@
     "activationEvents": [
         "onCommand:vscode-appwrite.Connect",
         "onView:Appwrite",
-        "onView:Users",
-        "onView:Database",
-        "onView:Health",
-        "onView:Functions",
+        "onView:Projects",
         "onCommand:vscode-appwrite.AddProject",
         "onCommand:vscode-appwrite.CreateTag"
     ],
@@ -344,28 +341,8 @@
         "views": {
             "Appwrite": [
                 {
-                    "id": "Users",
-                    "name": "Users"
-                },
-                {
-                    "id": "Database",
-                    "name": "Database"
-                },
-                {
-                    "id": "Storage",
-                    "name": "Storage"
-                },
-                {
-                    "id": "Health",
-                    "name": "Health"
-                },
-                {
                     "id": "Projects",
                     "name": "Projects"
-                },
-                {
-                    "id": "Functions",
-                    "name": "Functions (Preview)"
                 }
             ]
         },

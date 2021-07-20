@@ -1,19 +1,30 @@
 import * as vscode from "vscode";
-import { healthClient } from "../../client";
 import { ext } from "../../extensionVariables";
 import { HealthTreeItem } from "./HealthTreeItem";
 import * as dayjs from "dayjs";
 import * as localizedFormat from "dayjs/plugin/localizedFormat";
-import { healthTooltips } from "../../appwrite/Health";
-import { AppwriteHealth } from "../../appwrite";
+import { Health, healthTooltips } from "../../appwrite/Health";
+import { AppwriteHealth, Client } from "../../appwrite";
 import { promiseWithTimeout } from "../../utils/promiseWithTimeout";
-// dayjs.extend(relativeTime);
+import { AppwriteTreeItemBase } from '../../ui/AppwriteTreeItemBase';
+import { ProjectTreeItem } from '../projects/ProjectTreeItem';
 dayjs.extend(localizedFormat);
 
-export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
+export class HealthParentTreeItem extends AppwriteTreeItemBase<ProjectTreeItem> {
+
+    private readonly healthClient: Health;
+
+    constructor(parent: ProjectTreeItem, sdk: Client) {
+        super(parent, 'Health');
+        this.healthClient = new Health(sdk);
+        this.iconPath = new vscode.ThemeIcon('pulse');
+    }
+
     private _onDidChangeTreeData: vscode.EventEmitter<HealthTreeItem | undefined | void> = new vscode.EventEmitter<
         HealthTreeItem | undefined | void
     >();
+
+    label = 'Health';
 
     private lastChecked: Date = new Date();
 
@@ -27,11 +38,9 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
         return element;
     }
 
-    async getChildren(element?: HealthTreeItem): Promise<vscode.TreeItem[]> {
-        if (healthClient === undefined) {
-            return [];
-        }
+    collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
 
+    async getChildren(element?: HealthTreeItem): Promise<vscode.TreeItem[]> {
         // get children for root
         if (element === undefined) {
             try {
@@ -39,7 +48,7 @@ export class HealthTreeItemProvider implements vscode.TreeDataProvider<vscode.Tr
                     10000,
                     async () => {
                         try {
-                            return await healthClient?.checkup();
+                            return await this.healthClient?.checkup();
                         } catch (e) {
                             ext.outputChannel?.append('Error: ' + e.message);
                             vscode.window.showErrorMessage('Could not connect to Appwrite project');

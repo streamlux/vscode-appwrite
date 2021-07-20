@@ -1,13 +1,18 @@
 import * as vscode from "vscode";
-import { client } from "../../client";
-import { Function, FunctionsList } from "../../appwrite";
+import { Client, Function, FunctionsList } from "../../appwrite";
 import { AppwriteSDK } from "../../constants";
 import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
 import { ext } from "../../extensionVariables";
 import { EventEmitter, TreeItem } from "vscode";
 import { FunctionTreeItem } from "./FunctionTreeItem";
+import { ProjectTreeItem } from "../projects/ProjectTreeItem";
 
-export class FunctionsTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
+export class FunctionsTreeItemProvider extends AppwriteTreeItemBase<ProjectTreeItem> {
+    constructor(parent: ProjectTreeItem, private readonly sdk: Client) {
+        super(parent, "Functions");
+        this.iconPath = new vscode.ThemeIcon('github-action');
+    }
+
     private _onDidChangeTreeData: EventEmitter<TreeItem | undefined | void> = new EventEmitter<TreeItem | undefined | void>();
 
     readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | void> = this._onDidChangeTreeData.event;
@@ -25,28 +30,18 @@ export class FunctionsTreeItemProvider implements vscode.TreeDataProvider<vscode
         return element;
     }
 
-    async getChildren(parent?: AppwriteTreeItemBase | TreeItem): Promise<vscode.TreeItem[]> {
-        if (client === undefined) {
-            return Promise.resolve([]);
+    collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+
+    async getChildren(): Promise<vscode.TreeItem[]> {
+        const functionsSdk = new AppwriteSDK.Functions(this.sdk);
+
+        const list: FunctionsList = await functionsSdk.list();
+
+        if (list) {
+            const functionTreeItems = list.functions.map((func: Function) => new FunctionTreeItem(func, this)) ?? [];
+            return functionTreeItems;
         }
 
-        if (parent === undefined) {
-            const functionsSdk = new AppwriteSDK.Functions(client);
-
-            const list: FunctionsList = await functionsSdk.list();
-
-            if (list) {
-                const functionTreeItems = list.functions.map((func: Function) => new FunctionTreeItem(func, this)) ?? [];
-                return functionTreeItems;
-            }
-
-            return [{ label: "No functions found" }];
-        }
-
-        if (parent instanceof AppwriteTreeItemBase) {
-            return await parent.getChildren?.() ?? [];
-        }
-
-        return [];
+        return [{ label: "No functions found" }];
     }
 }

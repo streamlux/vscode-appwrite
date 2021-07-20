@@ -1,13 +1,25 @@
 import * as vscode from "vscode";
-import { client } from "../../client";
 import AppwriteCall from "../../utils/AppwriteCall";
-import { Collection, CollectionsList } from "../../appwrite";
+import { Client, Collection, CollectionsList } from "../../appwrite";
 import { CollectionTreeItem } from "./CollectionTreeItem";
 import { AppwriteSDK } from "../../constants";
 import { ext } from '../../extensionVariables';
 import { AppwriteTreeItemBase } from '../../ui/AppwriteTreeItemBase';
+import { ProjectTreeItem } from '../projects/ProjectTreeItem';
+import { Database } from '../../appwrite/Database';
 
-export class DatabaseTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
+export class DatabaseTreeItemProvider extends AppwriteTreeItemBase<ProjectTreeItem> {
+
+    private databaseClient: Database;
+
+    constructor(parent: ProjectTreeItem, private readonly sdk: Client) {
+        super(parent, 'Database');
+        this.databaseClient = new Database(sdk);
+        this.iconPath = new vscode.ThemeIcon('database');
+    }
+
+    collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+
     private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | void> = new vscode.EventEmitter<
         CollectionTreeItem | undefined | void
     >();
@@ -29,15 +41,12 @@ export class DatabaseTreeItemProvider implements vscode.TreeDataProvider<vscode.
 
     async getChildren(parent?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
         ext.outputChannel?.appendLine('getChildren for: ' + parent?.label);
-        if (client === undefined) {
-            return Promise.resolve([]);
-        }
 
         if (parent instanceof AppwriteTreeItemBase) {
             return await parent.getChildren?.() ?? [];
         }
 
-        const databaseSdk = new AppwriteSDK.Database(client);
+        const databaseSdk = new AppwriteSDK.Database(this.sdk);
 
         const collectionsList = await AppwriteCall<CollectionsList, CollectionsList>(databaseSdk.listCollections());
         if (collectionsList) {

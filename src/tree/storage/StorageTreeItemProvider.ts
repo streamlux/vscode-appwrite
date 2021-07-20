@@ -1,30 +1,37 @@
-import * as vscode from "vscode";
-import { storageClient } from "../../client";
+import { Event, EventEmitter, ThemeIcon, TreeItem, TreeItemCollapsibleState } from 'vscode';
+import { Client } from "../../appwrite";
+import { Storage } from "../../appwrite/Storage";
+import { AppwriteTreeItemBase } from "../../ui/AppwriteTreeItemBase";
+import { ProjectTreeItem } from "../projects/ProjectTreeItem";
 import { FileTreeItem } from "./FileTreeItem";
 
-export class StorageTreeItemProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
-    private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | void> = new vscode.EventEmitter<
-        vscode.TreeItem | undefined | void
+export class StorageTreeItemProvider extends AppwriteTreeItemBase<ProjectTreeItem> {
+    constructor(parent: ProjectTreeItem, private readonly sdk: Client) {
+        super(parent, "Storage");
+        this.iconPath = new ThemeIcon('archive');
+    }
+
+    private _onDidChangeTreeData: EventEmitter<TreeItem | undefined | void> = new EventEmitter<
+        TreeItem | undefined | void
     >();
 
-    readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | void> = this._onDidChangeTreeData.event;
+    readonly onDidChangeTreeData: Event<TreeItem | undefined | void> = this._onDidChangeTreeData.event;
 
     refresh(): void {
         this._onDidChangeTreeData.fire();
     }
 
-    getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
+    getTreeItem(element: TreeItem): TreeItem {
         return element;
     }
 
-    async getChildren(_element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
-        if (storageClient === undefined) {
-            return [];
-        }
+    collapsibleState = TreeItemCollapsibleState.Collapsed;
 
+    async getChildren(_element?: TreeItem): Promise<TreeItem[]> {
+        const storageClient = new Storage(this.sdk);
         const files = await storageClient.listFiles();
         if (files === undefined || files?.files.length === 0) {
-            const noStorage = new vscode.TreeItem("No files found");
+            const noStorage = new TreeItem("No files found");
             return [noStorage];
         }
         return files.files.map((file) => new FileTreeItem(file));
