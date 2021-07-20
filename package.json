@@ -203,11 +203,6 @@
                 "category": "Appwrite"
             },
             {
-                "command": "vscode-appwrite.setActiveProject",
-                "title": "Set as active",
-                "category": "Appwrite"
-            },
-            {
                 "command": "vscode-appwrite.refreshProjects",
                 "title": "Refresh projects",
                 "icon": "$(refresh)",
