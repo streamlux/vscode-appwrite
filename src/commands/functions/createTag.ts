@@ -153,9 +153,10 @@ async function createTagFromUri(functionId: string, command: string, uri: string
         }
         else {
             const comm = "tar -C " + uri + "/bin/Debug/net5.0/linux-x64 -zcvf" + uri + "/code.tar.gz publish";
+            const a = uri + "/code.tar.gz";
             const result = execSync(comm);
-            if (fs.statSync(uri + "code.tar.gz")) {
-
+            if (fs.statSync(a)) {
+                tarFilePath = a;
                 window.showInformationMessage("udalo sie");
 
             } else {
