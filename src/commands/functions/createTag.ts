@@ -1,14 +1,17 @@
+/* eslint-disable no-empty */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ProgressLocation, QuickPickItem, Uri, window, workspace } from "vscode";
 import { functionsClient } from "../../client";
 import { getTarReadStream } from "../../utils/tar";
 import { ext } from "../../extensionVariables";
+import * as path from "path";
 import * as fs from "fs";
 import { TagsTreeItem } from "../../tree/functions/tags/TagsTreeItem";
 import { selectWorkspaceFolder } from "../../utils/workspace";
 import { ProgressMessage } from "../../utils/types";
 import { Tag } from "../../appwrite";
 import { activateTag } from "./activateTag";
-
+import { execSync } from "child_process";
 export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
     if (item instanceof Uri) {
         const functions = await functionsClient?.list();
@@ -39,7 +42,7 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
                 if (pick.detail === undefined) {
                     return;
                 }
-                return await createTagFromUri(pick.detail, command, item, progress);
+                return await createTagFromUri(pick.detail, command, item.path, progress, false);
             }
         );
         if (tag) {
@@ -61,13 +64,32 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
             value = tags.tags[tags.tags.length - 1].command;
         }
         const command = await window.showInputBox({ value, prompt: "Command to run your code" });
+        const commaasdsdnd = await window.showInputBox({ value, prompt: folder });
         if (command === undefined) {
             return;
         }
+        // there is a  special way to publishing a tag for .net5.0
+        const envPick = await window.showQuickPick(
+            [".net5.0", "other"],
+            { placeHolder: "Select env" }
+        );
+        let customTarCreation = false;
+        try {
+            if (envPick === ".net5.0") {
+                const comm = "dotnet publish --runtime linux-x64 --framework net5.0 --no-self-contained " + folder;
+                const result = execSync(comm);
+                if (fs.statSync(folder + "/bin/Debug/net5.0/linux-x64/")) {
+                    customTarCreation = true;
+                }
+            }
+        } catch (error) {
+            window.showErrorMessage("Error publishing .net archive.\n" + error);
+        }
+
         const tag = await window.withProgress(
             { location: ProgressLocation.Notification, title: "Creating tag..." },
             async (progress, _token) => {
-                return await createTagFromUri(func.$id, command, Uri.parse(folder), progress);
+                return await createTagFromUri(func.$id, command, folder, progress, customTarCreation);
             }
         );
 
@@ -102,10 +124,11 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
         if (command === undefined) {
             return;
         }
+
         const tag = await window.withProgress(
             { location: ProgressLocation.Notification, title: "Creating tag..." },
             async (progress, _token) => {
-                return await createTagFromUri(funcId, command, Uri.parse(folder), progress);
+                return await createTagFromUri(funcId, command, folder, progress, false);
             }
         );
 
@@ -116,7 +139,7 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
     }
 }
 
-async function createTagFromUri(functionId: string, command: string, uri: Uri, progress: ProgressMessage): Promise<Tag | undefined> {
+async function createTagFromUri(functionId: string, command: string, uri: string, progress: ProgressMessage, customTarCreation: boolean): Promise<Tag | undefined> {
     progress.report({ message: "Creating tarball", increment: 10 });
 
     if (functionsClient === undefined) {
@@ -125,7 +148,21 @@ async function createTagFromUri(functionId: string, command: string, uri: Uri, p
 
     let tarFilePath;
     try {
-        tarFilePath = await getTarReadStream(uri);
+        if (customTarCreation === false) {
+            tarFilePath = await getTarReadStream(Uri.parse(uri));
+        }
+        else {
+            const comm = "tar -C " + uri + "/bin/Debug/net5.0/linux-x64 -zcvf" + uri + "/code.tar.gz publish";
+            const result = execSync(comm);
+            if (fs.statSync(uri + "code.tar.gz")) {
+
+                window.showInformationMessage("udalo sie");
+
+            } else {
+                window.showErrorMessage("Error creating tar file.\n");
+
+            }
+        }
     } catch (e) {
         window.showErrorMessage("Error creating tar file.\n" + e);
         return;
