@@ -64,20 +64,20 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
             value = tags.tags[tags.tags.length - 1].command;
         }
         const command = await window.showInputBox({ value, prompt: "Command to run your code" });
-        const commaasdsdnd = await window.showInputBox({ value, prompt: folder });
         if (command === undefined) {
             return;
         }
         // there is a  special way to publishing a tag for .net5.0
         const envPick = await window.showQuickPick(
             [".net5.0", "other"],
-            { placeHolder: "Select env" }
+            { placeHolder: "Select runtime" }
         );
+
         let customTarCreation = false;
         try {
             if (envPick === ".net5.0") {
                 const comm = "dotnet publish --runtime linux-x64 --framework net5.0 --no-self-contained " + folder;
-                const result = execSync(comm);
+                execSync(comm);
                 if (fs.statSync(folder + "/bin/Debug/net5.0/linux-x64/")) {
                     customTarCreation = true;
                 }
@@ -148,21 +148,18 @@ async function createTagFromUri(functionId: string, command: string, uri: string
 
     let tarFilePath;
     try {
-        if (customTarCreation === false) {
-            tarFilePath = await getTarReadStream(Uri.parse(uri));
-        }
-        else {
-            const comm = "tar -C " + uri + "/bin/Debug/net5.0/linux-x64 -zcvf" + uri + "/code.tar.gz publish";
-            const a = uri + "/code.tar.gz";
+        if (customTarCreation === true) {
+            const tarPath = uri + "/code.tar.gz";
+            const comm = "tar -C " + uri + "/bin/Debug/net5.0/linux-x64 -zcvf" + tarPath;
             const result = execSync(comm);
-            if (fs.statSync(a)) {
-                tarFilePath = a;
-                window.showInformationMessage("udalo sie");
-
+            if (fs.statSync(tarPath)) {
+                tarFilePath = tarPath;
             } else {
                 window.showErrorMessage("Error creating tar file.\n");
-
             }
+        }
+        else {
+            tarFilePath = await getTarReadStream(Uri.parse(uri));
         }
     } catch (e) {
         window.showErrorMessage("Error creating tar file.\n" + e);
