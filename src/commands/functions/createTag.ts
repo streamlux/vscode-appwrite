@@ -8,6 +8,7 @@ import { selectWorkspaceFolder } from "../../utils/workspace";
 import { ProgressMessage } from "../../utils/types";
 import { Tag } from "../../appwrite";
 import { activateTag } from "./activateTag";
+import { execSync } from "child_process";
 
 export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
     if (item instanceof Uri) {
@@ -39,7 +40,7 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
                 if (pick.detail === undefined) {
                     return;
                 }
-                return await createTagFromUri(pick.detail, command, item, progress);
+                return await createTagFromUri(pick.detail, command, item.path, progress, "", "");
             }
         );
         if (tag) {
@@ -64,10 +65,32 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
         if (command === undefined) {
             return;
         }
+
+        // there is a  special way to publishing a tag for .net5.0
+        const envPick = await window.showQuickPick(
+            [".net5.0", "other"],
+            { placeHolder: "Select runtime" }
+        );
+
+        let customTarCreationCommand = "";
+        let customTarPath = "";
+        try {
+            if (envPick === ".net5.0") {
+                const comm = "dotnet publish --runtime linux-x64 --framework net5.0 --no-self-contained " + folder;
+                execSync(comm);
+                if (fs.statSync(folder + "/bin/Debug/net5.0/linux-x64/")) {
+                    customTarPath = folder + "/code.tar.gz";
+                    customTarCreationCommand = "tar -C " + folder + "/bin/Debug/net5.0/linux-x64 -zcvf " + customTarPath + " publish";
+                }
+            }
+        } catch (error) {
+            window.showErrorMessage("Error publishing .net archive.\n" + error);
+        }
+
         const tag = await window.withProgress(
             { location: ProgressLocation.Notification, title: "Creating tag..." },
             async (progress, _token) => {
-                return await createTagFromUri(func.$id, command, Uri.parse(folder), progress);
+                return await createTagFromUri(func.$id, command, folder, progress, customTarCreationCommand, customTarPath);
             }
         );
 
@@ -102,10 +125,11 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
         if (command === undefined) {
             return;
         }
+
         const tag = await window.withProgress(
             { location: ProgressLocation.Notification, title: "Creating tag..." },
             async (progress, _token) => {
-                return await createTagFromUri(funcId, command, Uri.parse(folder), progress);
+                return await createTagFromUri(funcId, command, folder, progress, "", "");
             }
         );
 
@@ -116,7 +140,7 @@ export async function createTag(item?: TagsTreeItem | Uri): Promise<void> {
     }
 }
 
-async function createTagFromUri(functionId: string, command: string, uri: Uri, progress: ProgressMessage): Promise<Tag | undefined> {
+async function createTagFromUri(functionId: string, command: string, folder: string, progress: ProgressMessage, customTarCreationCommand: string, customTarPath: string): Promise<Tag | undefined> {
     progress.report({ message: "Creating tarball", increment: 10 });
 
     if (functionsClient === undefined) {
@@ -125,7 +149,17 @@ async function createTagFromUri(functionId: string, command: string, uri: Uri, p
 
     let tarFilePath;
     try {
-        tarFilePath = await getTarReadStream(uri);
+        if (customTarCreationCommand !== "") {
+            execSync(customTarCreationCommand);
+            if (fs.statSync(customTarPath)) {
+                tarFilePath = customTarPath;
+            } else {
+                window.showErrorMessage("Error creating tar file.\n");
+            }
+        }
+        else {
+            tarFilePath = await getTarReadStream(Uri.parse(folder));
+        }
     } catch (e) {
         window.showErrorMessage("Error creating tar file.\n" + e);
         return;
